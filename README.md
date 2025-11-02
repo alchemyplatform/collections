@@ -12,7 +12,7 @@ We use [Bruno](https://www.usebruno.com/) - an open-source, git-based and fully 
 |--------------|----------|-----------|------|----------|---------|
 | **alchemy**  | ✓        | N/A       | N/A  | ✓        | N/A     |
 | **evm**      | ✓        | ✓         | N/A  | N/A      | N/A     |
-| **aptos**    | N/A      | N/A       | ✓    | ✓        | N/A     |
+| **aptos**    | N/A      | N/A       | ✓    | ✓        | ✓     |
 | **bitcoin**  | ✓        | N/A       | N/A  | N/A      | N/A     |
 | **solana**   | ✓        | ✓         | ✓    | N/A      | N/A     |
 | **sui**      | ✓        | N/A       | ✓    | N/A      | ✓       |
