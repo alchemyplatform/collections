@@ -10,13 +10,13 @@ We use [Bruno](https://www.usebruno.com/) - an open-source, git-based and fully 
 
 | Collection   | JSON-RPC | WebSocket | gRPC | REST API | GraphQL |
 |--------------|----------|-----------|------|----------|---------|
+| **alchemy**  | ✓        | N/A       | N/A  | ✓        | N/A     |
 | **evm**      | ✓        | ✓         | N/A  | N/A      | N/A     |
-| **solana**   | ✓        | ✓         | ✓    | N/A      | N/A     |
-| **bitcoin**  | ✓        | N/A       | N/A  | N/A      | N/A     |
 | **aptos**    | N/A      | N/A       | ✓    | ✓        | N/A     |
+| **bitcoin**  | ✓        | N/A       | N/A  | N/A      | N/A     |
+| **solana**   | ✓        | ✓         | ✓    | N/A      | N/A     |
 | **sui**      | ✓        | N/A       | ✓    | N/A      | ✓       |
 | **zksync**   | ✓        | N/A       | N/A  | N/A      | N/A     |
-| **alchemy**  | ✓        | N/A       | N/A  | ✓        | N/A     |
 
 ## Getting Started
 
