@@ -28,7 +28,7 @@ Go to [usebruno.com/downloads](https://www.usebruno.com/downloads) or use Homebr
 brew install bruno
 ```
 
-### Configuration 
+### Usage 
 
 1. **Clone the repository:**
 ```bash
@@ -44,22 +44,24 @@ git clone https://github.com/alchemyplatform/collections.git
   - Open the collection in Bruno.
   - Go to **Environments** tab.
   - Create a Global environment to use across multiple collections.
+    ![Bruno - Global Environment](image.png)
   - Add your Alchemy API key:
     ```
     api_key: your-alchemy-api-key-here
     ```
-    ![Bruno - Global Environment](image.png)
 
 4. **Start testing:**
   - Browse available requests.
   - Click **Send** to execute.
   - View responses and documentation
 
-**Stay updated:**
+## Updates
+
+To get latest collections, navigate to your local `collections` directory and run:
+
 ```bash
 git pull
 ```
-Bruno automatically loads new requests.
 
 ## Contributing 🙋
 
