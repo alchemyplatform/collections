@@ -22,13 +22,13 @@ We use [Bruno](https://www.usebruno.com/) - an open-source, git-based and fully 
 
 ### Installation
 
-Install Bruno by going to [usebruno.com/downloads](https://www.usebruno.com/downloads) or using Homebrew:
+Go to [usebruno.com/downloads](https://www.usebruno.com/downloads) or use Homebrew:
 
 ```bash
 brew install bruno
 ```
 
-### Using collections 
+### Configuration 
 
 1. **Clone the repository:**
 ```bash
@@ -48,8 +48,7 @@ git clone https://github.com/alchemyplatform/collections.git
     ```
     api_key: your-alchemy-api-key-here
     ```
-
-  ![Bruno - Global Environment](image.png)
+    ![Bruno - Global Environment](image.png)
 
 4. **Start testing:**
   - Browse available requests.
@@ -64,7 +63,8 @@ Bruno automatically loads new requests.
 
 ## Contributing 🙋
 
-We welcome contributions! 
+We welcome contributions!
+This repo is maintained by [Alchemy's Solutions Engineering team](https://github.com/alchemyplatform/lab).
 
 ### How to Contribute
 
@@ -73,24 +73,19 @@ To add new blockchain methods or improve existing collections:
 1. **Fork the repository**
 
 2. **Add your `.bru` file:**
-   - Place it in the appropriate collection folder (e.g., `evm/eth/`, `solana/`, `alchemy/`)
-   - Follow the existing format with example parameters and documentation
-   - Include inline docs describing the method, parameters, and use cases
+  - Place it in the appropriate collection folder (e.g., `evm/eth/`, `solana/`, `alchemy/`).
+  - Follow the existing format with example parameters and documentation.
+  - Include inline docs describing the method, parameters, and use cases.
 
 3. **Create a Pull Request:**
-   - Provide a clear description of what you're adding or fixing
-   - Include example usage if adding a new method
-   - Reference any related issues
+  - Provide a clear description of what you're adding or fixing.
+  - Include example usage if adding a new method.
+  - Reference any related issues.
 
 ### Examples
 
-- **New methods** - Add missing RPC methods or API endpoints
-- **Better examples** - Improve parameter values with real-world use cases  
-- **Documentation** - Enhance inline documentation in `.bru` files
-- **Bug fixes** - Fix incorrect parameters or broken requests
+- **New methods** - add missing RPC methods or API endpoints
+- **Better examples** - improve parameter values with real-world use cases  
+- **Documentation** - enhance inline documentation in `.bru` files
+- **Bug fixes** - fix incorrect parameters or broken requests
 
----
-
-## Contributors
-
-This repo is maintained by [Alchemy's Solutions Engineering team](https://github.com/alchemyplatform/lab).
