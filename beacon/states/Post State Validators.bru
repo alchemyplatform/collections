@@ -1,0 +1,72 @@
+meta {
+  name: Post State Validators
+  type: http
+  seq: 6
+}
+
+post {
+  url: https://eth-mainnetbeacon.g.alchemy.com/v2/{{api_key}}/eth/v1/beacon/states/:state_id/validators
+  body: json
+  auth: none
+}
+
+params:path {
+  state_id: head
+}
+
+body:json {
+  {
+    "ids": ["1", "2"],
+    "statuses": ["active_ongoing"]
+  }
+}
+
+docs {
+  ## Post State Validators
+
+  Returns filterable list of validators with their balance, status, and index. Accepts a JSON body with `ids` and `statuses` arrays for filtering. This is the POST variant of the GET validators endpoint, useful when the list of IDs is too large for query parameters.
+
+  ### Request Body
+  - `ids` (optional) - Array of either hex encoded public keys (any bytes48 with 0x prefix) or validator indices.
+  - `statuses` (optional) - Array of validator statuses to filter by.
+
+  ### Response (200)
+  ```json
+  {
+    "execution_optimistic": false,
+    "finalized": true,
+    "data": [
+      {
+        "index": "1",
+        "balance": "32000000000",
+        "status": "active_ongoing",
+        "validator": {
+          "pubkey": "0x93247f2209abcacf57b75a51dafae777f9dd38bc7053d1af526f220a7489a6d3a2753e5f3e8b1cfe39b56f43611df74a",
+          "withdrawal_credentials": "0x01000000000000000000000015f4b914a0ccd14333d850ff311d6dafbfbaa32b",
+          "effective_balance": "32000000000",
+          "slashed": false,
+          "activation_eligibility_epoch": "0",
+          "activation_epoch": "0",
+          "exit_epoch": "18446744073709551615",
+          "withdrawable_epoch": "18446744073709551615"
+        }
+      },
+      {
+        "index": "2",
+        "balance": "32000000000",
+        "status": "active_ongoing",
+        "validator": {
+          "pubkey": "0xa572cbea904d67468808c8eb50a9450c9721db309128012543902d0ac358a62ae28f75bb8f1c7c42c39a8c5529bf0f4e",
+          "withdrawal_credentials": "0x01000000000000000000000015f4b914a0ccd14333d850ff311d6dafbfbaa32b",
+          "effective_balance": "32000000000",
+          "slashed": false,
+          "activation_eligibility_epoch": "0",
+          "activation_epoch": "0",
+          "exit_epoch": "18446744073709551615",
+          "withdrawable_epoch": "18446744073709551615"
+        }
+      }
+    ]
+  }
+  ```
+}

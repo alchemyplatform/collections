@@ -1,0 +1,32 @@
+meta {
+  name: Get Spec
+  type: http
+  seq: 2
+}
+
+get {
+  url: https://eth-mainnetbeacon.g.alchemy.com/v2/{{api_key}}/eth/v1/config/spec
+  body: none
+  auth: none
+}
+
+docs {
+  ## Get Spec
+
+  Retrieve the full chain specification configuration. Returns all consensus-layer configuration parameters for the network.
+
+  ### Response (200)
+  ```json
+  {
+    "data": {
+      "MAX_COMMITTEES_PER_SLOT": "64",
+      "TARGET_COMMITTEE_SIZE": "128",
+      "SLOTS_PER_EPOCH": "32",
+      "MIN_DEPOSIT_AMOUNT": "1000000000",
+      "MAX_EFFECTIVE_BALANCE": "32000000000",
+      "SECONDS_PER_SLOT": "12",
+      ...
+    }
+  }
+  ```
+}

@@ -1,0 +1,40 @@
+meta {
+  name: Subscribe To Subnets
+  type: http
+  seq: 10
+}
+
+post {
+  url: https://eth-mainnetbeacon.g.alchemy.com/v2/{{api_key}}/eth/v1/validator/beacon_committee_subscriptions
+  body: json
+  auth: none
+}
+
+body:json {
+  [
+    {
+      "validator_index": "1",
+      "committee_index": "0",
+      "committees_at_slot": "4",
+      "slot": "32",
+      "is_aggregator": true
+    }
+  ]
+}
+
+docs {
+  ## Subscribe To Subnets
+
+  Subscribe to beacon committee subnets. Signals to the beacon node which subnets the validator intends to attest on. If `is_aggregator` is true, the node will also subscribe to the aggregation subnet.
+
+  ### Request Body
+  Array of subscription objects, each containing:
+  - `validator_index`: Index of the validator making the subscription
+  - `committee_index`: The committee index to subscribe to
+  - `committees_at_slot`: Number of committees at the subscription slot
+  - `slot`: The slot to subscribe for
+  - `is_aggregator`: Whether the validator is an aggregator for this slot/committee
+
+  ### Response (200)
+  Subscriptions are registered. Returns 200 on success.
+}

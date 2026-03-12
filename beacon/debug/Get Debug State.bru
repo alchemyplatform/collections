@@ -1,0 +1,48 @@
+meta {
+  name: Get Debug State
+  type: http
+  seq: 3
+}
+
+get {
+  url: https://eth-mainnetbeacon.g.alchemy.com/v2/{{api_key}}/eth/v2/debug/beacon/states/:state_id
+  body: none
+  auth: none
+}
+
+params:path {
+  state_id: head
+}
+
+docs {
+  ## Get Debug State
+
+  Retrieve the full beacon state for a given state ID. This returns the complete SSZ-encoded state and is typically used for debugging only. The response is very large.
+
+  ### Path Parameters
+  - `state_id` (required): State identifier (`head`, `genesis`, `finalized`, `justified`, slot number, or state root)
+
+  ### Response (200)
+  ```json
+  {
+    "data": {
+      "genesis_time": "1606824023",
+      "genesis_validators_root": "0x4b363db94e286120d76eb905340fcd4e979ae41e26b22f72b66852b3e8e3377b",
+      "slot": "8000000",
+      "fork": {
+        "previous_version": "0x03000000",
+        "current_version": "0x04000000",
+        "epoch": "269568"
+      },
+      "latest_block_header": {
+        "slot": "8000000",
+        "proposer_index": "123456",
+        "parent_root": "0x...",
+        "state_root": "0x...",
+        "body_root": "0x..."
+      },
+      ...
+    }
+  }
+  ```
+}

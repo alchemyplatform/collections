@@ -1,0 +1,30 @@
+meta {
+  name: Get State Root
+  type: http
+  seq: 1
+}
+
+get {
+  url: https://eth-mainnetbeacon.g.alchemy.com/v2/{{api_key}}/eth/v1/beacon/states/:state_id/root
+  body: none
+  auth: none
+}
+
+params:path {
+  state_id: head
+}
+
+docs {
+  ## Get State Root
+
+  Calculates HashTreeRoot for state with given `state_id`. If the `state_id` value is root, the same value will be returned.
+
+  ### Response (200)
+  ```json
+  {
+    "data": {
+      "root": "0xcf8e0d4e9587369b2301d0790347320302cc0943d5a1884560367e8208d920f2"
+    }
+  }
+  ```
+}

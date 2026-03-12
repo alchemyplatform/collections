@@ -1,0 +1,24 @@
+meta {
+  name: Get Health
+  type: http
+  seq: 7
+}
+
+get {
+  url: https://eth-mainnetbeacon.g.alchemy.com/v2/{{api_key}}/eth/v1/node/health
+  body: none
+  auth: none
+}
+
+docs {
+  ## Get Health
+
+  Returns the health status of the beacon node.
+
+  - **200**: Node is healthy and fully synced
+  - **206**: Node is syncing
+  - **503**: Node is not initialized or having issues
+
+  ### Response (200)
+  No response body. Status code indicates health state.
+}

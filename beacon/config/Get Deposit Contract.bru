@@ -1,0 +1,27 @@
+meta {
+  name: Get Deposit Contract
+  type: http
+  seq: 3
+}
+
+get {
+  url: https://eth-mainnetbeacon.g.alchemy.com/v2/{{api_key}}/eth/v1/config/deposit_contract
+  body: none
+  auth: none
+}
+
+docs {
+  ## Get Deposit Contract
+
+  Retrieve the address and chain ID of the deposit contract used by the beacon chain.
+
+  ### Response (200)
+  ```json
+  {
+    "data": {
+      "chain_id": "1",
+      "address": "0x00000000219ab540356cBB839Cbe05303d7705Fa"
+    }
+  }
+  ```
+}

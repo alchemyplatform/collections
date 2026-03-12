@@ -1,0 +1,71 @@
+meta {
+  name: Get Blobs
+  type: http
+  seq: 2
+}
+
+get {
+  url: https://eth-mainnetbeacon.g.alchemy.com/v2/{{api_key}}/eth/v1/beacon/blobs/:block_id
+  body: none
+  auth: none
+}
+
+params:path {
+  block_id: head
+}
+
+docs {
+  ## Get Blobs
+
+  Returns the blobs for the given block ID. Similar to blob sidecars but returns the blob data associated with the block.
+
+  ### Response (200)
+  ```json
+  {
+    "data": [
+      {
+        "index": "0",
+        "blob": "0x0000000000000000000000000000000000000000000000000000000000000000...(abbreviated, 131072 bytes)",
+        "kzg_commitment": "0xa94170080366611e0e1cc13e74a42c5fa2de14fe4078fb4779f438fa44dc4d0fe9d24ab38ee1bb2a38b6d3fc2e2a1d2a1b3c4d5e6f7a8b9c0d1e2f3a4b5c6d7e8",
+        "kzg_proof": "0xb25e98636ab67a48e7d3d1c437c2f56a8a12c3d4e5f6a7b8c9d0e1f2a3b4c5d6e7f8a9b0c1d2e3f4a5b6c7d8e9f0a1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6e7f8",
+        "signed_block_header": {
+          "message": {
+            "slot": "9543218",
+            "proposer_index": "482617",
+            "parent_root": "0xa7e8b32f1b6d4c9e0f2a3b5c7d8e9f0a1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6",
+            "state_root": "0x1f2e3d4c5b6a7980e1d2c3b4a5968778695a4b3c2d1e0f9a8b7c6d5e4f3a2b1",
+            "body_root": "0x9c0d1e2f3a4b5c6d7e8f9a0b1c2d3e4f5a6b7c8d9e0f1a2b3c4d5e6f7a8b9c0"
+          },
+          "signature": "0xc3d4e5f6a7b8c9d0e1f2a3b4c5d6e7f8a9b0c1d2e3f4a5b6c7d8e9f0a1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6e7f8a9b0c1d2e3f4a5b6c7d8e9f0a1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6e7f8"
+        },
+        "kzg_commitment_inclusion_proof": [
+          "0x1a2b3c4d5e6f7a8b9c0d1e2f3a4b5c6d7e8f9a0b1c2d3e4f5a6b7c8d9e0f1a2",
+          "0x2b3c4d5e6f7a8b9c0d1e2f3a4b5c6d7e8f9a0b1c2d3e4f5a6b7c8d9e0f1a2b3",
+          "0x3c4d5e6f7a8b9c0d1e2f3a4b5c6d7e8f9a0b1c2d3e4f5a6b7c8d9e0f1a2b3c4"
+        ]
+      },
+      {
+        "index": "1",
+        "blob": "0x0100000000000000000000000000000000000000000000000000000000000000...(abbreviated, 131072 bytes)",
+        "kzg_commitment": "0xb85280080477722f1f2dd24f85b53c6fb3e25fe5189gc5880g549gb55ed5e1gfe0e35bc49ff2cc3b49c7e4gd3f3b2e3b2c4d5e6f7a8b9c0d1e2f3a4b5c6d7e8",
+        "kzg_proof": "0xc36f09747bc78b59f8e4e2d548d3g67b9b23d4e5f6a7b8c9d0e1f2a3b4c5d6e7f8a9b0c1d2e3f4a5b6c7d8e9f0a1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6e7f8",
+        "signed_block_header": {
+          "message": {
+            "slot": "9543218",
+            "proposer_index": "482617",
+            "parent_root": "0xa7e8b32f1b6d4c9e0f2a3b5c7d8e9f0a1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6",
+            "state_root": "0x1f2e3d4c5b6a7980e1d2c3b4a5968778695a4b3c2d1e0f9a8b7c6d5e4f3a2b1",
+            "body_root": "0x9c0d1e2f3a4b5c6d7e8f9a0b1c2d3e4f5a6b7c8d9e0f1a2b3c4d5e6f7a8b9c0"
+          },
+          "signature": "0xc3d4e5f6a7b8c9d0e1f2a3b4c5d6e7f8a9b0c1d2e3f4a5b6c7d8e9f0a1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6e7f8a9b0c1d2e3f4a5b6c7d8e9f0a1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6e7f8"
+        },
+        "kzg_commitment_inclusion_proof": [
+          "0x4d5e6f7a8b9c0d1e2f3a4b5c6d7e8f9a0b1c2d3e4f5a6b7c8d9e0f1a2b3c4d5",
+          "0x5e6f7a8b9c0d1e2f3a4b5c6d7e8f9a0b1c2d3e4f5a6b7c8d9e0f1a2b3c4d5e6",
+          "0x6f7a8b9c0d1e2f3a4b5c6d7e8f9a0b1c2d3e4f5a6b7c8d9e0f1a2b3c4d5e6f7"
+        ]
+      }
+    ]
+  }
+  ```
+}

@@ -1,0 +1,32 @@
+meta {
+  name: Get State Fork
+  type: http
+  seq: 2
+}
+
+get {
+  url: https://eth-mainnetbeacon.g.alchemy.com/v2/{{api_key}}/eth/v1/beacon/states/:state_id/fork
+  body: none
+  auth: none
+}
+
+params:path {
+  state_id: head
+}
+
+docs {
+  ## Get State Fork
+
+  Returns Fork object for state with given `state_id`.
+
+  ### Response (200)
+  ```json
+  {
+    "data": {
+      "previous_version": "0x00000000",
+      "current_version": "0x00000000",
+      "epoch": "0"
+    }
+  }
+  ```
+}

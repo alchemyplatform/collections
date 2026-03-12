@@ -1,0 +1,41 @@
+meta {
+  name: Get Peers
+  type: http
+  seq: 2
+}
+
+get {
+  url: https://eth-mainnetbeacon.g.alchemy.com/v2/{{api_key}}/eth/v1/node/peers?state=connected&direction=inbound
+  body: none
+  auth: none
+}
+
+params:query {
+  ~state: connected
+  ~direction: inbound
+}
+
+docs {
+  ## Get Peers
+
+  Retrieve the list of peers connected to the node, optionally filtered by state and direction.
+
+  ### Query Parameters
+  - `state` (optional): Filter by peer state (`disconnected`, `connecting`, `connected`, `disconnecting`)
+  - `direction` (optional): Filter by connection direction (`inbound`, `outbound`)
+
+  ### Response (200)
+  ```json
+  {
+    "data": [
+      {
+        "peer_id": "QmYyQSo1c1Ym7orWxLYvCrM2EmxFTANf8wXmmE7DWjhx5N",
+        "enr": "enr:-IS4QHCYrYZbAKWCBRlAy5zzaDZXJBGkcnh4MHcBFZnt...",
+        "last_seen_p2p_address": "/ip4/7.7.7.7/tcp/4242/p2p/QmYyQSo1c1Ym7orWxLYvCrM2EmxFTANf8wXmmE7DWjhx5N",
+        "state": "connected",
+        "direction": "inbound"
+      }
+    ]
+  }
+  ```
+}

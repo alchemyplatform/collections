@@ -1,0 +1,38 @@
+meta {
+  name: Submit BLS To Execution Changes
+  type: http
+  seq: 10
+}
+
+post {
+  url: https://eth-mainnetbeacon.g.alchemy.com/v2/{{api_key}}/eth/v1/beacon/pool/bls_to_execution_changes
+  body: json
+  auth: none
+}
+
+body:json {
+  [
+    {
+      "message": {
+        "validator_index": "42",
+        "from_bls_pubkey": "0x93247f2209abcacf57b75a51dafae777f9dd38bc7053d1af526f220a7489a6d3a2753e5f3e8b1cfe39b56f43611df74a",
+        "to_execution_address": "0xabcf8e0d4e9587369b2301d0790347320302cc09"
+      },
+      "signature": "0xb3a7e2c6f89a1b4d5e6f708192a3b4c5d6e7f8091a2b3c4d5e6f708192a3b4c5d6e7f8091a2b3c4d5e6f708192a3b4c5d6e7f8091a2b3c4d5e6f708192a3b4c5d6e7f8091a2b3c4d5e6f708192a3b4c5d6e7f8091a2b3c4d5e6f70819"
+    }
+  ]
+}
+
+docs {
+  ## Submit BLS To Execution Changes
+
+  Submit signed BLS to execution change messages to the beacon node to be broadcast to the network.
+
+  ### Request Body
+  Array of signed BLS to execution change objects, each containing:
+  - `message`: BLS to execution change data (validator_index, from_bls_pubkey, to_execution_address)
+  - `signature`: BLS signature
+
+  ### Response (200)
+  BLS to execution changes are stored in the pool and broadcast to the network. Returns 200 on success.
+}

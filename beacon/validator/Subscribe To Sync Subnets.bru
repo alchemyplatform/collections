@@ -1,0 +1,36 @@
+meta {
+  name: Subscribe To Sync Subnets
+  type: http
+  seq: 11
+}
+
+post {
+  url: https://eth-mainnetbeacon.g.alchemy.com/v2/{{api_key}}/eth/v1/validator/sync_committee_subscriptions
+  body: json
+  auth: none
+}
+
+body:json {
+  [
+    {
+      "validator_index": "1",
+      "sync_committee_indices": ["0", "1"],
+      "until_epoch": "256"
+    }
+  ]
+}
+
+docs {
+  ## Subscribe To Sync Subnets
+
+  Subscribe to sync committee subnets. Signals to the beacon node which sync committee subnets the validator intends to participate in.
+
+  ### Request Body
+  Array of sync committee subscription objects, each containing:
+  - `validator_index`: Index of the validator making the subscription
+  - `sync_committee_indices`: Indices of the sync committee the validator is assigned to
+  - `until_epoch`: The final epoch (exclusive) that the subscription is valid for
+
+  ### Response (200)
+  Subscriptions are registered. Returns 200 on success.
+}

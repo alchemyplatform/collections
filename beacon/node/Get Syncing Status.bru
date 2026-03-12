@@ -1,0 +1,30 @@
+meta {
+  name: Get Syncing Status
+  type: http
+  seq: 6
+}
+
+get {
+  url: https://eth-mainnetbeacon.g.alchemy.com/v2/{{api_key}}/eth/v1/node/syncing
+  body: none
+  auth: none
+}
+
+docs {
+  ## Get Syncing Status
+
+  Retrieve the syncing status of the beacon node, including head slot, sync distance, and whether the node is currently syncing.
+
+  ### Response (200)
+  ```json
+  {
+    "data": {
+      "head_slot": "8000000",
+      "sync_distance": "0",
+      "is_syncing": false,
+      "is_optimistic": false,
+      "el_offline": false
+    }
+  }
+  ```
+}
