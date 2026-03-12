@@ -1,0 +1,26 @@
+meta {
+  name: Get Node Version
+  type: http
+  seq: 5
+}
+
+get {
+  url: https://eth-mainnetbeacon.g.alchemy.com/v2/{{api_key}}/eth/v1/node/version
+  body: none
+  auth: none
+}
+
+docs {
+  ## Get Node Version
+
+  Retrieve the version string of the running beacon node.
+
+  ### Response (200)
+  ```json
+  {
+    "data": {
+      "version": "Lighthouse/v4.5.0-441fc16/x86_64-linux"
+    }
+  }
+  ```
+}

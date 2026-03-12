@@ -1,0 +1,35 @@
+meta {
+  name: Submit Voluntary Exit
+  type: http
+  seq: 8
+}
+
+post {
+  url: https://eth-mainnetbeacon.g.alchemy.com/v2/{{api_key}}/eth/v1/beacon/pool/voluntary_exits
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "message": {
+      "epoch": "1",
+      "validator_index": "42"
+    },
+    "signature": "0x8a2f4c6e8b0d1f3a5c7e9012b4d6f8a0c2e4168a0b2d4f6a8c0e2143658a7b9c0d2e4f6a8b0c2d4e6f8a0b2c4d6e8f0a2b4c6d8e0f2a4b6c8d0e2f4a6b8c0d2e4f6a8b0c2d4e6f8a0b2c4d6e8f0a2b4c6d8e0f2a4b6c8d0"
+  }
+}
+
+docs {
+  ## Submit Voluntary Exit
+
+  Submit a signed voluntary exit to the beacon node to be broadcast to the network.
+
+  ### Request Body
+  A signed voluntary exit object containing:
+  - `message`: Voluntary exit data (epoch, validator_index)
+  - `signature`: BLS signature
+
+  ### Response (200)
+  Voluntary exit is stored in the pool and broadcast to the network. Returns 200 on success.
+}

@@ -1,0 +1,90 @@
+meta {
+  name: Get Block
+  type: http
+  seq: 1
+}
+
+get {
+  url: https://eth-mainnetbeacon.g.alchemy.com/v2/{{api_key}}/eth/v2/beacon/blocks/:block_id
+  body: none
+  auth: none
+}
+
+params:path {
+  block_id: head
+}
+
+docs {
+  ## Get Block
+
+  Returns the full beacon block for the given block ID. The block ID can be a slot number, a hex-encoded block root, or one of the special values: `head`, `genesis`, `finalized`.
+
+  **Note:** The response is large. The structure below is abbreviated.
+
+  ### Response (200)
+  ```json
+  {
+    "version": "deneb",
+    "execution_optimistic": false,
+    "finalized": false,
+    "data": {
+      "message": {
+        "slot": "9543218",
+        "proposer_index": "482617",
+        "parent_root": "0xa7e8b32f1b6d4c9e0f2a3b5c7d8e9f0a1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6",
+        "state_root": "0x1f2e3d4c5b6a7980e1d2c3b4a5968778695a4b3c2d1e0f9a8b7c6d5e4f3a2b1",
+        "body": {
+          "randao_reveal": "0x8a9b0c1d2e3f4a5b6c7d8e9f0a1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6e7f8a9b0c1d2e3f4a5b6c7d8e9f0a1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6e7f8a9b0c1d2e3f4a5b6c7d8e9f0a1b2c3d",
+          "eth1_data": {
+            "deposit_root": "0xd5a3b2c1e4f5a6b7c8d9e0f1a2b3c4d5e6f7a8b9c0d1e2f3a4b5c6d7e8f9a0",
+            "deposit_count": "843297",
+            "block_hash": "0x4e3f2a1b0c9d8e7f6a5b4c3d2e1f0a9b8c7d6e5f4a3b2c1d0e9f8a7b6c5d4e3"
+          },
+          "graffiti": "0x0000000000000000000000000000000000000000000000000000000000000000",
+          "proposer_slashings": [],
+          "attester_slashings": [],
+          "attestations": [
+            {
+              "aggregation_bits": "0xff3f",
+              "data": {
+                "slot": "9543217",
+                "index": "0",
+                "beacon_block_root": "0xa7e8b32f1b6d4c9e0f2a3b5c7d8e9f0a1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6",
+                "source": {
+                  "epoch": "298225",
+                  "root": "0x5c6d7e8f9a0b1c2d3e4f5a6b7c8d9e0f1a2b3c4d5e6f7a8b9c0d1e2f3a4b5c6"
+                },
+                "target": {
+                  "epoch": "298225",
+                  "root": "0x9a0b1c2d3e4f5a6b7c8d9e0f1a2b3c4d5e6f7a8b9c0d1e2f3a4b5c6d7e8f9a0"
+                }
+              },
+              "signature": "0xb1c2d3e4f5a6b7c8d9e0f1a2b3c4d5e6f7a8b9c0d1e2f3a4b5c6d7e8f9a0b1c2d3e4f5a6b7c8d9e0f1a2b3c4d5e6f7a8b9c0d1e2f3a4b5c6d7e8f9a0b1c2d3e4f5a6b7c8d9e0f1a2b3c4d5e6"
+            }
+          ],
+          "deposits": [],
+          "voluntary_exits": [],
+          "sync_aggregate": {
+            "sync_committee_bits": "0xffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
+            "sync_committee_signature": "0xa1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6e7f8a9b0c1d2e3f4a5b6c7d8e9f0a1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6e7f8a9b0c1d2e3f4a5b6c7d8e9f0a1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6"
+          },
+          "execution_payload": {
+            "parent_hash": "0x4e3f2a1b0c9d8e7f6a5b4c3d2e1f0a9b8c7d6e5f4a3b2c1d0e9f8a7b6c5d4e3",
+            "fee_recipient": "0x388c818ca8b9251b393131c08a736a67ccb19297",
+            "state_root": "0x1f2e3d4c5b6a7980e1d2c3b4a5968778695a4b3c2d1e0f9a8b7c6d5e4f3a2b1",
+            "block_number": "19234567",
+            "gas_limit": "30000000",
+            "gas_used": "15234567",
+            "timestamp": "1710288000",
+            "block_hash": "0x8f9a0b1c2d3e4f5a6b7c8d9e0f1a2b3c4d5e6f7a8b9c0d1e2f3a4b5c6d7e8f9"
+          },
+          "blob_kzg_commitments": [
+            "0xa94170080366611e0e1cc13e74a42c5fa2de14fe4078fb4779f438fa44dc4d0fe9d24ab38ee1bb2a38b6d3fc2e2a1d2a1b3c4d5e6f7a8b9c0d1e2f3a4b5c6d7e8"
+          ]
+        }
+      },
+      "signature": "0xc3d4e5f6a7b8c9d0e1f2a3b4c5d6e7f8a9b0c1d2e3f4a5b6c7d8e9f0a1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6e7f8a9b0c1d2e3f4a5b6c7d8e9f0a1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6e7f8"
+    }
+  }
+  ```
+}

@@ -1,0 +1,49 @@
+meta {
+  name: Get Validator
+  type: http
+  seq: 5
+}
+
+get {
+  url: https://eth-mainnetbeacon.g.alchemy.com/v2/{{api_key}}/eth/v1/beacon/states/:state_id/validators/:validator_id
+  body: none
+  auth: none
+}
+
+params:path {
+  state_id: head
+  validator_id: 1
+}
+
+docs {
+  ## Get Validator
+
+  Returns validator specified by state and id or public key along with status and balance.
+
+  ### Path Parameters
+  - `state_id` - State identifier. Can be one of: `head`, `genesis`, `finalized`, `justified`, `<slot>`, `<hex encoded stateRoot with 0x prefix>`.
+  - `validator_id` - Either hex encoded public key (any bytes48 with 0x prefix) or validator index.
+
+  ### Response (200)
+  ```json
+  {
+    "execution_optimistic": false,
+    "finalized": true,
+    "data": {
+      "index": "1",
+      "balance": "32000000000",
+      "status": "active_ongoing",
+      "validator": {
+        "pubkey": "0x93247f2209abcacf57b75a51dafae777f9dd38bc7053d1af526f220a7489a6d3a2753e5f3e8b1cfe39b56f43611df74a",
+        "withdrawal_credentials": "0x01000000000000000000000015f4b914a0ccd14333d850ff311d6dafbfbaa32b",
+        "effective_balance": "32000000000",
+        "slashed": false,
+        "activation_eligibility_epoch": "0",
+        "activation_epoch": "0",
+        "exit_epoch": "18446744073709551615",
+        "withdrawable_epoch": "18446744073709551615"
+      }
+    }
+  }
+  ```
+}

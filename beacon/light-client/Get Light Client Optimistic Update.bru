@@ -1,0 +1,56 @@
+meta {
+  name: Get Light Client Optimistic Update
+  type: http
+  seq: 4
+}
+
+get {
+  url: https://eth-mainnetbeacon.g.alchemy.com/v2/{{api_key}}/eth/v1/beacon/light_client/optimistic_update
+  body: none
+  auth: none
+}
+
+docs {
+  ## Get Light Client Optimistic Update
+
+  Returns the latest light client optimistic update. Contains the attested header and sync aggregate, allowing light clients to track the head of the chain optimistically without waiting for finality.
+
+  ### Response (200)
+  ```json
+  {
+    "version": "deneb",
+    "data": {
+      "attested_header": {
+        "beacon": {
+          "slot": "9543218",
+          "proposer_index": "482617",
+          "parent_root": "0xa7e8b32f1b6d4c9e0f2a3b5c7d8e9f0a1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6",
+          "state_root": "0x1f2e3d4c5b6a7980e1d2c3b4a5968778695a4b3c2d1e0f9a8b7c6d5e4f3a2b1",
+          "body_root": "0x9c0d1e2f3a4b5c6d7e8f9a0b1c2d3e4f5a6b7c8d9e0f1a2b3c4d5e6f7a8b9c0"
+        },
+        "execution": {
+          "parent_hash": "0x4e3f2a1b0c9d8e7f6a5b4c3d2e1f0a9b8c7d6e5f4a3b2c1d0e9f8a7b6c5d4e3",
+          "fee_recipient": "0x388c818ca8b9251b393131c08a736a67ccb19297",
+          "state_root": "0x1f2e3d4c5b6a7980e1d2c3b4a5968778695a4b3c2d1e0f9a8b7c6d5e4f3a2b1",
+          "block_number": "19234567",
+          "gas_limit": "30000000",
+          "gas_used": "15234567",
+          "timestamp": "1710288000",
+          "block_hash": "0x8f9a0b1c2d3e4f5a6b7c8d9e0f1a2b3c4d5e6f7a8b9c0d1e2f3a4b5c6d7e8f9"
+        },
+        "execution_branch": [
+          "0x1a2b3c4d5e6f7a8b9c0d1e2f3a4b5c6d7e8f9a0b1c2d3e4f5a6b7c8d9e0f1a2",
+          "0x2b3c4d5e6f7a8b9c0d1e2f3a4b5c6d7e8f9a0b1c2d3e4f5a6b7c8d9e0f1a2b3",
+          "0x3c4d5e6f7a8b9c0d1e2f3a4b5c6d7e8f9a0b1c2d3e4f5a6b7c8d9e0f1a2b3c4",
+          "0x4d5e6f7a8b9c0d1e2f3a4b5c6d7e8f9a0b1c2d3e4f5a6b7c8d9e0f1a2b3c4d5"
+        ]
+      },
+      "sync_aggregate": {
+        "sync_committee_bits": "0xffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
+        "sync_committee_signature": "0xa1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6e7f8a9b0c1d2e3f4a5b6c7d8e9f0a1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6e7f8a9b0c1d2e3f4a5b6c7d8e9f0a1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6"
+      },
+      "signature_slot": "9543219"
+    }
+  }
+  ```
+}

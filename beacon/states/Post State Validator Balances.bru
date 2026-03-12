@@ -1,0 +1,48 @@
+meta {
+  name: Post State Validator Balances
+  type: http
+  seq: 8
+}
+
+post {
+  url: https://eth-mainnetbeacon.g.alchemy.com/v2/{{api_key}}/eth/v1/beacon/states/:state_id/validator_balances
+  body: json
+  auth: none
+}
+
+params:path {
+  state_id: head
+}
+
+body:json {
+  {
+    "id": ["1", "2"]
+  }
+}
+
+docs {
+  ## Post State Validator Balances
+
+  Returns filterable list of validators balances. Accepts a JSON body with an array of validator IDs. This is the POST variant of the GET validator balances endpoint, useful when the list of IDs is too large for query parameters.
+
+  ### Request Body
+  - `id` (optional) - Array of either hex encoded public keys (any bytes48 with 0x prefix) or validator indices.
+
+  ### Response (200)
+  ```json
+  {
+    "execution_optimistic": false,
+    "finalized": true,
+    "data": [
+      {
+        "index": "1",
+        "balance": "32000000000"
+      },
+      {
+        "index": "2",
+        "balance": "32000000000"
+      }
+    ]
+  }
+  ```
+}

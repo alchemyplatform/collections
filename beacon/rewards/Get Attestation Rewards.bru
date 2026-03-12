@@ -1,0 +1,65 @@
+meta {
+  name: Get Attestation Rewards
+  type: http
+  seq: 2
+}
+
+post {
+  url: https://eth-mainnetbeacon.g.alchemy.com/v2/{{api_key}}/eth/v1/beacon/rewards/attestations/:epoch
+  body: json
+  auth: none
+}
+
+params:path {
+  epoch: 1
+}
+
+body:json {
+  ["1", "2"]
+}
+
+docs {
+  ## Get Attestation Rewards
+
+  Retrieve attestation rewards for a given epoch. Optionally filter by validator indices in the request body.
+
+  ### Path Parameters
+  - `epoch`: Epoch number to get attestation rewards for
+
+  ### Request Body
+  Array of validator index strings to filter results. Send an empty array to get rewards for all validators.
+
+  ### Response (200)
+  ```json
+  {
+    "data": {
+      "ideal_rewards": [
+        {
+          "effective_balance": "32000000000",
+          "head": "2500",
+          "target": "5000",
+          "source": "2500"
+        }
+      ],
+      "total_rewards": [
+        {
+          "validator_index": "1",
+          "head": "2500",
+          "target": "5000",
+          "source": "2500",
+          "inclusion_delay": "500",
+          "inactivity": "0"
+        },
+        {
+          "validator_index": "2",
+          "head": "2500",
+          "target": "5000",
+          "source": "2500",
+          "inclusion_delay": "500",
+          "inactivity": "0"
+        }
+      ]
+    }
+  }
+  ```
+}

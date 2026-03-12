@@ -1,0 +1,29 @@
+meta {
+  name: Get Peer Count
+  type: http
+  seq: 4
+}
+
+get {
+  url: https://eth-mainnetbeacon.g.alchemy.com/v2/{{api_key}}/eth/v1/node/peer_count
+  body: none
+  auth: none
+}
+
+docs {
+  ## Get Peer Count
+
+  Retrieve the number of peers by connection state.
+
+  ### Response (200)
+  ```json
+  {
+    "data": {
+      "disconnected": "12",
+      "connecting": "1",
+      "connected": "44",
+      "disconnecting": "0"
+    }
+  }
+  ```
+}

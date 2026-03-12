@@ -1,0 +1,49 @@
+meta {
+  name: Get Aggregate Attestation
+  type: http
+  seq: 8
+}
+
+get {
+  url: https://eth-mainnetbeacon.g.alchemy.com/v2/{{api_key}}/eth/v1/validator/aggregate_attestation?attestation_data_root=0xcf8e0d4e9587369b2301d0790347320302cc0943d5a1884560367e8208d920f2&slot=1
+  body: none
+  auth: none
+}
+
+params:query {
+  attestation_data_root: 0xcf8e0d4e9587369b2301d0790347320302cc0943d5a1884560367e8208d920f2
+  slot: 1
+}
+
+docs {
+  ## Get Aggregate Attestation
+
+  Aggregates all attestations matching given attestation data root and slot. A validator that is assigned to aggregate attestations calls this endpoint to collect an aggregate for broadcasting.
+
+  ### Query Parameters
+  - `attestation_data_root`: HashTreeRoot of the attestation data to aggregate (32-byte hex string).
+  - `slot`: The slot for which the aggregate attestation is requested.
+
+  ### Response (200)
+  ```json
+  {
+    "data": {
+      "aggregation_bits": "0xff3f",
+      "data": {
+        "slot": "1",
+        "index": "0",
+        "beacon_block_root": "0xcf8e0d4e9587369b2301d0790347320302cc0943d5a1884560367e8208d920f2",
+        "source": {
+          "epoch": "0",
+          "root": "0x4b363db94e286120d76eb905340fcd4e979ae41e26b22f72b66852b3e8e3377b"
+        },
+        "target": {
+          "epoch": "0",
+          "root": "0xa1de6e671cdf96f52d35f9a0cd20b7ce38e1eb2db3a710f62aaf4036aaed7cb3"
+        }
+      },
+      "signature": "0xb3a7e2c6f89a1b4d5e6f708192a3b4c5d6e7f8091a2b3c4d5e6f708192a3b4c5d6e7f8091a2b3c4d5e6f708192a3b4c5d6e7f8091a2b3c4d5e6f708192a3b4c5d6e7f8091a2b3c4d5e6f708192a3b4c5d6e7f8091a2b3c4d5e6f70819"
+    }
+  }
+  ```
+}

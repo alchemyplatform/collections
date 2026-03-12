@@ -1,0 +1,83 @@
+meta {
+  name: Publish Blinded Block
+  type: http
+  seq: 5
+}
+
+post {
+  url: https://eth-mainnetbeacon.g.alchemy.com/v2/{{api_key}}/eth/v1/beacon/blinded_blocks
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "message": {
+      "slot": "9543218",
+      "proposer_index": "482617",
+      "parent_root": "0xa7e8b32f1b6d4c9e0f2a3b5c7d8e9f0a1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6",
+      "state_root": "0x1f2e3d4c5b6a7980e1d2c3b4a5968778695a4b3c2d1e0f9a8b7c6d5e4f3a2b1",
+      "body": {
+        "randao_reveal": "0x8a9b0c1d2e3f4a5b6c7d8e9f0a1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6e7f8a9b0c1d2e3f4a5b6c7d8e9f0a1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6e7f8a9b0c1d2e3f4a5b6c7d8e9f0a1b2c3d",
+        "eth1_data": {
+          "deposit_root": "0xd5a3b2c1e4f5a6b7c8d9e0f1a2b3c4d5e6f7a8b9c0d1e2f3a4b5c6d7e8f9a0",
+          "deposit_count": "843297",
+          "block_hash": "0x4e3f2a1b0c9d8e7f6a5b4c3d2e1f0a9b8c7d6e5f4a3b2c1d0e9f8a7b6c5d4e3"
+        },
+        "graffiti": "0x0000000000000000000000000000000000000000000000000000000000000000",
+        "proposer_slashings": [],
+        "attester_slashings": [],
+        "attestations": [],
+        "deposits": [],
+        "voluntary_exits": [],
+        "sync_aggregate": {
+          "sync_committee_bits": "0xffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
+          "sync_committee_signature": "0xa1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6e7f8a9b0c1d2e3f4a5b6c7d8e9f0a1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6e7f8a9b0c1d2e3f4a5b6c7d8e9f0a1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6"
+        },
+        "execution_payload_header": {
+          "parent_hash": "0x4e3f2a1b0c9d8e7f6a5b4c3d2e1f0a9b8c7d6e5f4a3b2c1d0e9f8a7b6c5d4e3",
+          "fee_recipient": "0x388c818ca8b9251b393131c08a736a67ccb19297",
+          "state_root": "0x1f2e3d4c5b6a7980e1d2c3b4a5968778695a4b3c2d1e0f9a8b7c6d5e4f3a2b1",
+          "receipts_root": "0x2a3b4c5d6e7f8a9b0c1d2e3f4a5b6c7d8e9f0a1b2c3d4e5f6a7b8c9d0e1f2a3",
+          "logs_bloom": "0x00000000000000000000000000000000",
+          "prev_randao": "0x7c8d9e0f1a2b3c4d5e6f7a8b9c0d1e2f3a4b5c6d7e8f9a0b1c2d3e4f5a6b7c8",
+          "block_number": "19234567",
+          "gas_limit": "30000000",
+          "gas_used": "15234567",
+          "timestamp": "1710288000",
+          "extra_data": "0x",
+          "base_fee_per_gas": "25000000000",
+          "block_hash": "0x8f9a0b1c2d3e4f5a6b7c8d9e0f1a2b3c4d5e6f7a8b9c0d1e2f3a4b5c6d7e8f9",
+          "transactions_root": "0x3e4f5a6b7c8d9e0f1a2b3c4d5e6f7a8b9c0d1e2f3a4b5c6d7e8f9a0b1c2d3e4",
+          "withdrawals_root": "0x6b7c8d9e0f1a2b3c4d5e6f7a8b9c0d1e2f3a4b5c6d7e8f9a0b1c2d3e4f5a6b7"
+        }
+      }
+    },
+    "signature": "0xc3d4e5f6a7b8c9d0e1f2a3b4c5d6e7f8a9b0c1d2e3f4a5b6c7d8e9f0a1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6e7f8a9b0c1d2e3f4a5b6c7d8e9f0a1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6e7f8"
+  }
+}
+
+docs {
+  ## Publish Blinded Block
+
+  Instructs the beacon node to broadcast a signed blinded beacon block to the network. A blinded block contains an `execution_payload_header` instead of a full `execution_payload`, which is used in MEV-boost workflows where the full payload is reconstructed by the relay.
+
+  ### Request Body
+  A signed blinded beacon block object containing:
+  - `message`: The blinded beacon block with slot, proposer_index, parent_root, state_root, and body (with execution_payload_header)
+  - `signature`: BLS signature of the block
+
+  ### Response (200)
+  Empty response on success. The block was successfully broadcast to the network.
+
+  ### Response (202)
+  The block failed validation but was still broadcast (optimistic).
+
+  ### Response (400)
+  ```json
+  {
+    "code": 400,
+    "message": "Invalid blinded block: missing field 'signature'"
+  }
+  ```
+}

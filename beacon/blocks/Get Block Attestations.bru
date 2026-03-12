@@ -1,0 +1,65 @@
+meta {
+  name: Get Block Attestations
+  type: http
+  seq: 3
+}
+
+get {
+  url: https://eth-mainnetbeacon.g.alchemy.com/v2/{{api_key}}/eth/v1/beacon/blocks/:block_id/attestations
+  body: none
+  auth: none
+}
+
+params:path {
+  block_id: head
+}
+
+docs {
+  ## Get Block Attestations
+
+  Returns the attestations included in the requested block.
+
+  ### Response (200)
+  ```json
+  {
+    "execution_optimistic": false,
+    "finalized": false,
+    "data": [
+      {
+        "aggregation_bits": "0xff3f",
+        "data": {
+          "slot": "9543217",
+          "index": "0",
+          "beacon_block_root": "0xa7e8b32f1b6d4c9e0f2a3b5c7d8e9f0a1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6",
+          "source": {
+            "epoch": "298225",
+            "root": "0x5c6d7e8f9a0b1c2d3e4f5a6b7c8d9e0f1a2b3c4d5e6f7a8b9c0d1e2f3a4b5c6"
+          },
+          "target": {
+            "epoch": "298225",
+            "root": "0x9a0b1c2d3e4f5a6b7c8d9e0f1a2b3c4d5e6f7a8b9c0d1e2f3a4b5c6d7e8f9a0"
+          }
+        },
+        "signature": "0xb1c2d3e4f5a6b7c8d9e0f1a2b3c4d5e6f7a8b9c0d1e2f3a4b5c6d7e8f9a0b1c2d3e4f5a6b7c8d9e0f1a2b3c4d5e6f7a8b9c0d1e2f3a4b5c6d7e8f9a0b1c2d3e4f5a6b7c8d9e0f1a2b3c4d5e6"
+      },
+      {
+        "aggregation_bits": "0xff7f",
+        "data": {
+          "slot": "9543217",
+          "index": "1",
+          "beacon_block_root": "0xa7e8b32f1b6d4c9e0f2a3b5c7d8e9f0a1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6",
+          "source": {
+            "epoch": "298225",
+            "root": "0x5c6d7e8f9a0b1c2d3e4f5a6b7c8d9e0f1a2b3c4d5e6f7a8b9c0d1e2f3a4b5c6"
+          },
+          "target": {
+            "epoch": "298225",
+            "root": "0x9a0b1c2d3e4f5a6b7c8d9e0f1a2b3c4d5e6f7a8b9c0d1e2f3a4b5c6d7e8f9a0"
+          }
+        },
+        "signature": "0xd4e5f6a7b8c9d0e1f2a3b4c5d6e7f8a9b0c1d2e3f4a5b6c7d8e9f0a1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6e7f8a9b0c1d2e3f4a5b6c7d8e9f0a1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6e7f8a9"
+      }
+    ]
+  }
+  ```
+}

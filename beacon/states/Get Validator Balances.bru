@@ -1,0 +1,42 @@
+meta {
+  name: Get Validator Balances
+  type: http
+  seq: 7
+}
+
+get {
+  url: https://eth-mainnetbeacon.g.alchemy.com/v2/{{api_key}}/eth/v1/beacon/states/:state_id/validator_balances
+  body: none
+  auth: none
+}
+
+params:path {
+  state_id: head
+}
+
+params:query {
+  ~id: 1
+}
+
+docs {
+  ## Get Validator Balances
+
+  Returns filterable list of validators balances. Balances will be returned for all indices or public keys that match known validators. If an index or public key does not match any known validator, no balance will be returned but this will not cause an error.
+
+  ### Query Parameters
+  - `id` (optional) - Either hex encoded public key (any bytes48 with 0x prefix) or validator index.
+
+  ### Response (200)
+  ```json
+  {
+    "execution_optimistic": false,
+    "finalized": true,
+    "data": [
+      {
+        "index": "1",
+        "balance": "32000000000"
+      }
+    ]
+  }
+  ```
+}

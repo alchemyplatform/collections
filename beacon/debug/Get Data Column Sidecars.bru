@@ -1,0 +1,55 @@
+meta {
+  name: Get Data Column Sidecars
+  type: http
+  seq: 2
+}
+
+get {
+  url: https://eth-mainnetbeacon.g.alchemy.com/v2/{{api_key}}/eth/v1/debug/beacon/data_column_sidecars/:block_id?indices=0,1
+  body: none
+  auth: none
+}
+
+params:path {
+  block_id: head
+}
+
+params:query {
+  ~indices: 0,1
+}
+
+docs {
+  ## Get Data Column Sidecars
+
+  Retrieve data column sidecars for a given block. Optionally filter by column indices.
+
+  ### Path Parameters
+  - `block_id` (required): Block identifier (`head`, `genesis`, `finalized`, slot number, or block root)
+
+  ### Query Parameters
+  - `indices` (optional): Comma-separated list of column indices to retrieve
+
+  ### Response (200)
+  ```json
+  {
+    "data": [
+      {
+        "index": "0",
+        "column": "0x...",
+        "kzg_commitments": ["0x..."],
+        "kzg_proofs": ["0x..."],
+        "signed_block_header": {
+          "message": {
+            "slot": "8000000",
+            "proposer_index": "123456",
+            "parent_root": "0x...",
+            "state_root": "0x...",
+            "body_root": "0x..."
+          },
+          "signature": "0x..."
+        }
+      }
+    ]
+  }
+  ```
+}

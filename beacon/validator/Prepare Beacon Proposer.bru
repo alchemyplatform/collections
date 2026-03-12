@@ -1,0 +1,34 @@
+meta {
+  name: Prepare Beacon Proposer
+  type: http
+  seq: 14
+}
+
+post {
+  url: https://eth-mainnetbeacon.g.alchemy.com/v2/{{api_key}}/eth/v1/validator/prepare_beacon_proposer
+  body: json
+  auth: none
+}
+
+body:json {
+  [
+    {
+      "validator_index": "1",
+      "fee_recipient": "0xabcf8e0d4e9587369b2301d0790347320302cc09"
+    }
+  ]
+}
+
+docs {
+  ## Prepare Beacon Proposer
+
+  Prepares the beacon node for potential block proposal by providing the fee recipient address for each validator. This information is used to set the fee recipient in the execution payload when the validator is selected to propose.
+
+  ### Request Body
+  Array of proposer preparation objects, each containing:
+  - `validator_index`: Index of the validator
+  - `fee_recipient`: Execution layer address (20-byte hex) to receive transaction fees
+
+  ### Response (200)
+  Proposer preparation data is registered. Returns 200 on success.
+}

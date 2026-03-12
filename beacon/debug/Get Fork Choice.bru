@@ -1,0 +1,45 @@
+meta {
+  name: Get Fork Choice
+  type: http
+  seq: 1
+}
+
+get {
+  url: https://eth-mainnetbeacon.g.alchemy.com/v2/{{api_key}}/eth/v1/debug/fork_choice
+  body: none
+  auth: none
+}
+
+docs {
+  ## Get Fork Choice
+
+  Retrieve the current fork choice context, including justified and finalized checkpoints and the full fork choice node tree.
+
+  ### Response (200)
+  ```json
+  {
+    "data": {
+      "justified_checkpoint": {
+        "epoch": "1",
+        "root": "0xcf8e..."
+      },
+      "finalized_checkpoint": {
+        "epoch": "1",
+        "root": "0xcf8e..."
+      },
+      "fork_choice_nodes": [
+        {
+          "slot": "1",
+          "block_root": "0xcf8e...",
+          "parent_root": "0xcf8e...",
+          "justified_epoch": "1",
+          "finalized_epoch": "1",
+          "weight": "100",
+          "validity": "valid",
+          "execution_block_hash": "0x..."
+        }
+      ]
+    }
+  }
+  ```
+}

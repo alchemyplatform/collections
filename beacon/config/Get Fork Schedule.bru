@@ -1,0 +1,45 @@
+meta {
+  name: Get Fork Schedule
+  type: http
+  seq: 1
+}
+
+get {
+  url: https://eth-mainnetbeacon.g.alchemy.com/v2/{{api_key}}/eth/v1/config/fork_schedule
+  body: none
+  auth: none
+}
+
+docs {
+  ## Get Fork Schedule
+
+  Retrieve the list of all scheduled and past forks, including their version identifiers and activation epochs.
+
+  ### Response (200)
+  ```json
+  {
+    "data": [
+      {
+        "previous_version": "0x00000000",
+        "current_version": "0x01000000",
+        "epoch": "74240"
+      },
+      {
+        "previous_version": "0x01000000",
+        "current_version": "0x02000000",
+        "epoch": "144896"
+      },
+      {
+        "previous_version": "0x02000000",
+        "current_version": "0x03000000",
+        "epoch": "194048"
+      },
+      {
+        "previous_version": "0x03000000",
+        "current_version": "0x04000000",
+        "epoch": "269568"
+      }
+    ]
+  }
+  ```
+}

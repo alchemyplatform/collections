@@ -1,0 +1,44 @@
+meta {
+  name: Submit Sync Committee Contributions
+  type: http
+  seq: 13
+}
+
+post {
+  url: https://eth-mainnetbeacon.g.alchemy.com/v2/{{api_key}}/eth/v1/validator/contribution_and_proofs
+  body: json
+  auth: none
+}
+
+body:json {
+  [
+    {
+      "message": {
+        "aggregator_index": "1",
+        "contribution": {
+          "slot": "1",
+          "beacon_block_root": "0xcf8e0d4e9587369b2301d0790347320302cc0943d5a1884560367e8208d920f2",
+          "subcommittee_index": "0",
+          "aggregation_bits": "0xffffffffffffffffffffffffffffffff",
+          "signature": "0xb3a7e2c6f89a1b4d5e6f708192a3b4c5d6e7f8091a2b3c4d5e6f708192a3b4c5d6e7f8091a2b3c4d5e6f708192a3b4c5d6e7f8091a2b3c4d5e6f708192a3b4c5d6e7f8091a2b3c4d5e6f708192a3b4c5d6e7f8091a2b3c4d5e6f70819"
+        },
+        "selection_proof": "0xa1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6e7f8a9b0c1d2e3f4a5b6c7d8e9f0a1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6e7f8a9b0c1d2e3f4a5b6c7d8e9f0a1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6"
+      },
+      "signature": "0xc3d4e5f6a7b8c9d0e1f2a3b4c5d6e7f8a9b0c1d2e3f4a5b6c7d8e9f0a1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6e7f8a9b0c1d2e3f4a5b6c7d8e9f0a1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6e7f8"
+    }
+  ]
+}
+
+docs {
+  ## Submit Sync Committee Contributions
+
+  Publish multiple signed sync committee contribution and proofs to the beacon node. The beacon node will validate and broadcast them to the network.
+
+  ### Request Body
+  Array of signed contribution and proof objects, each containing:
+  - `message`: The contribution and proof with `aggregator_index`, `contribution` (sync committee contribution), and `selection_proof`
+  - `signature`: BLS signature over the contribution and proof message
+
+  ### Response (200)
+  Contributions are stored and broadcast to the network. Returns 200 on success.
+}
