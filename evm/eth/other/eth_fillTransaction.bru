@@ -1,0 +1,44 @@
+meta {
+  name: eth_fillTransaction
+  type: http
+  seq: 6
+}
+
+post {
+  url: https://eth-mainnet.g.alchemy.com/v2/{{api_key}}
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "jsonrpc": "2.0",
+    "id": 1,
+    "method": "eth_fillTransaction",
+    "params": [
+      {
+        "from": "0xfe3b557e8fb62b89f4916b721be55ceb828dbd73",
+        "to": "0x627306090abab3a6e1400e9345bc60c78a8bef57",
+        "value": "0x1"
+      }
+    ]
+  }
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+}
+
+docs {
+  Fills in the default values of an unsigned transaction and returns it to the caller for further processing (signing + submission).
+  
+  **Args**:
+  - Transaction: Transaction call object (from, to, gas, gasPrice|maxFeePerGas|maxPriorityFeePerGas, value, data).
+  
+  **Returns**: Object with `raw` (RLP-encoded unsigned transaction) and `tx` (transaction object with all fields populated).
+  
+  **Edge cases & notes**:
+  - Requires an unlocked local account on the node; many hosted nodes disable this method.
+  - Missing fields (nonce, gas, gasPrice) are filled in with node defaults.
+}
