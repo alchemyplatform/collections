@@ -9,13 +9,13 @@
   "protobuf": {
     "protoFiles": [
       {
-        "path": "grpc/sui.proto",
+        "path": "grpc/proto/sui/rpc/v2/subscription_service.proto",
         "type": "file"
       }
     ],
     "importPaths": [
       {
-        "path": "grpc",
+        "path": "grpc/proto",
         "enabled": true
       }
     ]

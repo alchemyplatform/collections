@@ -14,7 +14,7 @@ grpc {
 }
 
 metadata {
-  x-api-key: {{api_key}}
+  X-Token: {{api_key}}
 }
 
 body:grpc {
@@ -30,15 +30,15 @@ body:grpc {
 
 docs {
   Subscribe to the live stream of executed checkpoints on Sui via gRPC.
-
+  
   This is the ONLY streaming RPC exposed by Sui's gRPC API. Sui does not
   offer per-transaction, per-event, or per-object subscriptions — clients
   consume the checkpoint stream and filter client-side.
-
+  
   **Service:** `sui.rpc.v2.SubscriptionService`
   **Method:** `SubscribeCheckpoints` (server-streaming)
   **Proto source:** https://github.com/MystenLabs/sui-apis/tree/main/proto/sui/rpc/v2
-
+  
   **Request fields:**
   - `read_mask` (optional google.protobuf.FieldMask): which fields of the
     Checkpoint response to populate. Common paths:
@@ -49,13 +49,13 @@ docs {
       - `contents`             (CheckpointContents)
       - `transactions`         (repeated ExecutedTransaction)
     Omit `read_mask` to receive all fields.
-
+  
   **Response stream (`SubscribeCheckpointsResponse`):**
   - `cursor` (uint64): the checkpoint sequence number of this message.
     Persist this client-side so you can resume from `cursor + 1` after a
     disconnect by re-subscribing and discarding earlier checkpoints.
   - `checkpoint` (Checkpoint): the requested checkpoint data, shaped by
     `read_mask`.
-
+  
   The stream is guaranteed to be in-order and gap-free.
 }
