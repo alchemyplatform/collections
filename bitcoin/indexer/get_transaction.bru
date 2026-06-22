@@ -1,0 +1,29 @@
+meta {
+  name: Get Transaction
+  type: http
+  seq: 2
+}
+
+get {
+  url: https://bitcoin-mainnet.g.alchemy.com/v2/{{api_key}}/api/v2/tx/:txid
+  body: none
+  auth: none
+}
+
+params:path {
+  txid: f4184fc596403b9d638783cf57adfe4c75c605f6356fbc91338530e9831e9e16
+}
+
+docs {
+  Returns normalized transaction data for a given transaction ID.
+
+  Parameters:
+  1. txid (string, required) - Hex-encoded transaction identifier.
+
+  Returns transaction details including:
+  - Transaction ID, version, lockTime, size, vsize, and raw hex
+  - Input (vin) and output (vout) details with addresses and values
+  - Block hash, height, confirmations, and blockTime
+  - Value, valueIn, fees, and rbf flag
+  - confirmationETABlocks and confirmationETASeconds for unconfirmed transactions
+}

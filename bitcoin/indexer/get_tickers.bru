@@ -1,0 +1,28 @@
+meta {
+  name: Get Tickers
+  type: http
+  seq: 11
+}
+
+get {
+  url: https://bitcoin-mainnet.g.alchemy.com/v2/{{api_key}}/api/v2/tickers
+  body: none
+  auth: none
+}
+
+params:query {
+  ~currency: usd
+  ~timestamp:
+}
+
+docs {
+  Returns the currency rate for the specified currency and timestamp. If the requested currency is unavailable for that timestamp, the closest rate is returned with the actual rate timestamp.
+
+  Query Parameters:
+  - currency (string, optional) - Fiat or crypto currency code (e.g. usd, eur, eth). Omit to return all.
+  - timestamp (integer, optional) - Unix timestamp to get historical rates. Omit to return the latest.
+
+  Returns exchange rate information including:
+  - rates object with currency codes as keys and numeric exchange rates as values
+  - ts timestamp of the returned rate data
+}

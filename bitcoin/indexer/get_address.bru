@@ -1,0 +1,47 @@
+meta {
+  name: Get Address
+  type: http
+  seq: 4
+}
+
+get {
+  url: https://bitcoin-mainnet.g.alchemy.com/v2/{{api_key}}/api/v2/address/:address
+  body: none
+  auth: none
+}
+
+params:path {
+  address: bc1qwfgdjyy95aay2686fn74h6a4nu9eev6np7q4fn204dkj3274frlqrskvx0
+}
+
+params:query {
+  ~page: 1
+  ~pageSize: 10
+  ~from:
+  ~to:
+  ~details: txs
+  ~secondary:
+}
+
+docs {
+  Returns balances and transactions for the given address. Transactions are sorted newest-first by block height.
+
+  Parameters:
+  1. address (string, required) - Bitcoin address to query
+
+  Query Parameters:
+  - page (integer, optional, defaults to 1) - Page of returned transactions, starting from 1.
+  - pageSize (integer, optional, defaults to 1000) - Number of transactions returned per page (max 1000).
+  - from (integer, optional) - Filter transactions starting from this block height.
+  - to (integer, optional) - Filter transactions up to this block height.
+  - details (enum, optional, defaults to txids) - Level of detail to return. Allowed values: basic, tokens, tokenBalances, txids, txslight, txs
+  - secondary (string, optional) - Secondary (fiat) currency code for balance conversion, e.g. usd or eur.
+
+  Returns address data including:
+  - Pagination info: page, totalPages, and itemsOnPage
+  - Confirmed balance, totalReceived, and totalSent
+  - Unconfirmed balance and unconfirmed transaction count
+  - Total transaction count and txids
+  - Token data with per-token balance, transfers, and path
+  - Secondary fiat value if a secondary currency is requested
+}
