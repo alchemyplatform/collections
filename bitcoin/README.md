@@ -69,8 +69,6 @@ This collection contains **16 Bitcoin Core RPC methods**, **12 UTXO Indexer REST
 
 ## Indexer WebSockets (4)
 
-Stream block, transaction, address, and fiat rate updates over a persistent WebSocket connection. Uses the same Alchemy API key and host as the REST indexer (`wss://bitcoin-mainnet.g.alchemy.com/v2/{apiKey}`).
-
 ### Subscriptions (4)
 
 - `subscribe_new_block` - Emits when a new block is added to the chain
