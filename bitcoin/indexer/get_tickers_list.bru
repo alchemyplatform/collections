@@ -5,20 +5,20 @@ meta {
 }
 
 get {
-  url: https://bitcoin-mainnet.g.alchemy.com/v2/{{api_key}}/api/v2/tickers-list
+  url: https://bitcoin-mainnet.g.alchemy.com/v2/{{api_key}}/api/v2/tickers-list/?timestamp=1578391200
   body: none
   auth: none
 }
 
 params:query {
-  ~timestamp:
+  timestamp: 1578391200
 }
 
 docs {
   Returns the list of available fiat currency tickers supported by the indexer.
 
   Query Parameters:
-  - timestamp (integer, optional) - Unix timestamp to get supported tickers at a specific point in time
+  - timestamp (integer, required) - Unix timestamp to get supported tickers at a specific point in time
 
   Returns ticker availability information including:
   - available_currencies array of supported fiat currency codes
