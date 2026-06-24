@@ -29,6 +29,7 @@ docs {
 
   Parameters:
   - currency (string, optional) - Filter to a single fiat currency (e.g. "usd", "eur"). When omitted, the server emits all available currencies on each update.
+  - tokens (string[], optional) - Filter to specific token symbols or contract/address keys.
 
   On subscribe, returns a confirmation that the subscription is active. Subsequent events include updated fiat rates for the requested currency or currencies.
 

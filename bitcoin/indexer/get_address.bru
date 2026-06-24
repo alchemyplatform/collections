@@ -20,7 +20,11 @@ params:query {
   ~from:
   ~to:
   ~details: txs
+  ~filter: inputs
+  ~contract:
+  ~protocols: erc4626
   ~secondary:
+  ~confirmedNonce: true
 }
 
 docs {
@@ -35,7 +39,11 @@ docs {
   - from (integer, optional) - Filter transactions starting from this block height.
   - to (integer, optional) - Filter transactions up to this block height.
   - details (enum, optional, defaults to txids) - Level of detail to return. Allowed values: basic, tokens, tokenBalances, txids, txslight, txs
+  - filter (string or integer, optional) - Filter account history by input/output side (inputs, outputs) or by numeric token/internal filter id.
+  - contract (string, optional) - Contract address used to filter token data.
+  - protocols (string, optional) - Optional protocol enrichments, comma-separated. Currently supported value: erc4626.
   - secondary (string, optional) - Secondary (fiat) currency code for balance conversion, e.g. usd or eur.
+  - confirmedNonce (boolean, optional) - When true, additionally return the confirmed nonce for Ethereum-like addresses.
 
   Returns address data including:
   - Pagination info: page, totalPages, and itemsOnPage

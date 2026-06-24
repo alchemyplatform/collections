@@ -16,6 +16,7 @@ params:path {
 
 params:query {
   ~confirmed: true
+  ~gap: 20
 }
 
 docs {
@@ -26,6 +27,7 @@ docs {
 
   Query Parameters:
   - confirmed (boolean, optional, defaults to false) - When true, exclude unconfirmed UTXOs.
+  - gap (integer, optional) - XPUB or descriptor derivation gap limit. Values are capped by the server (max 10000).
 
   Returns an array of UTXOs including:
   - Transaction ID, vout, value, and output address

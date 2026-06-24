@@ -21,23 +21,31 @@ params:query {
   ~to:
   ~details: txs
   ~tokens: used
+  ~filter: inputs
+  ~contract:
+  ~protocols: erc4626
   ~secondary:
+  ~gap: 20
 }
 
 docs {
-  Returns aggregated transaction history and balance for an extended public key.
+  Returns aggregated transaction history and balance for an extended public key or output descriptor. Transactions are sorted newest-first by block height.
 
   Parameters:
-  1. xpub (string, required) - Extended public key or output descriptor to query.
+  1. xpub (string, required) - Extended public key or supported output descriptor. URL-encode descriptors before placing them in the path.
 
   Query Parameters:
   - page (integer, optional, defaults to 1) - Page of returned transactions, starting from 1.
   - pageSize (integer, optional, defaults to 1000) - Number of transactions returned per page (max 1000).
   - from (integer, optional) - Filter transactions starting from this block height.
   - to (integer, optional) - Filter transactions up to this block height.
-  - details (enum, optional, defaults to txids) - Level of detail to return. Allowed values: basic, tokens, tokenBalances, txids, txs
+  - details (enum, optional, defaults to txids) - Level of detail to return. Allowed values: basic, tokens, tokenBalances, txids, txslight, txs
   - tokens (enum, optional, defaults to nonzero) - Which derived addresses to return. Allowed values: nonzero, used, derived
+  - filter (string or integer, optional) - Filter account history by input/output side (inputs, outputs) or by numeric token/internal filter id.
+  - contract (string, optional) - Contract address used to filter token data.
+  - protocols (string, optional) - Optional protocol enrichments, comma-separated. Currently supported value: erc4626.
   - secondary (string, optional) - Secondary (fiat) currency code for balance conversion, e.g. usd or eur.
+  - gap (integer, optional) - XPUB or descriptor derivation gap limit. Values are capped by the server (max 10000).
 
   Returns extended public key data including:
   - Pagination info: page, totalPages, and itemsOnPage
@@ -45,4 +53,6 @@ docs {
   - Total transaction count, txids, and unconfirmedTxs
   - usedTokens count and tokens array with per-address balance and transfer data
   - secondaryValue if a secondary currency is requested
+
+  Note: usedTokens reports the total number of used addresses for the XPUB, regardless of the tokens query filter.
 }
