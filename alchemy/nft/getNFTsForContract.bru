@@ -1,0 +1,41 @@
+meta {
+  name: getNFTsForContract
+  type: http
+  seq: 7
+}
+
+get {
+  url: https://eth-mainnet.g.alchemy.com/nft/v3/{{api_key}}/getNFTsForContract?contractAddress=0xe785E82358879F061BC3dcAC6f0444462D4b5330&withMetadata=true&limit=100
+  body: none
+  auth: none
+}
+
+params:query {
+  contractAddress: 0xe785E82358879F061BC3dcAC6f0444462D4b5330
+  ~withMetadata: true
+  ~startToken:
+  ~limit: 100
+  ~tokenUriTimeoutInMs: 0
+}
+
+headers {
+  Content-Type: application/json
+}
+
+docs {
+  Retrieves all NFTs for a given contract or collection.
+
+  Path Parameters:
+  - apiKey (string, required): Your Alchemy API key
+
+  Query Parameters:
+  - contractAddress (string, required): NFT contract address (ERC721 and ERC1155 supported)
+  - withMetadata (boolean, optional): Include NFT metadata; defaults to true
+  - startToken (string, optional): Token ID offset for pagination (hex or decimal)
+  - limit (integer, optional): Number of NFTs returned; defaults to 100
+  - tokenUriTimeoutInMs (integer, optional): Metadata fetch timeout; set 0 for cache-only
+
+  Returns: { nfts, pageKey }
+
+  https://www.alchemy.com/docs/data/nft-api/api-reference/nft-metadata-endpoints/get-nf-ts-for-contract-v-3
+}

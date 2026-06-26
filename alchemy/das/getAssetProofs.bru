@@ -1,0 +1,42 @@
+meta {
+  name: getAssetProofs
+  type: http
+  seq: 4
+}
+
+post {
+  url: https://solana-mainnet.g.alchemy.com/v2/{{api_key}}
+  body: json
+  auth: none
+}
+
+headers {
+  Content-Type: application/json
+}
+
+body:json {
+  {
+    "jsonrpc": "2.0",
+    "id": "bru",
+    "method": "getAssetProofs",
+    "params": {
+      "ids": [
+        "Bu1DEKeawy7txbnCEJE4BU3BKLXaNAKCYcHR4XhndGss",
+        "8vw7tdLGE3FBjaetsJrZAbbyssUrXai1aBJbUnj5S5uo"
+      ]
+    }
+  }
+}
+
+docs {
+  Returns the merkle tree proof information for multiple compressed assets.
+
+  Parameters:
+  - ids (string[], required): An array of compressed asset IDs
+
+  Returns: Array of proof objects each containing { root, proof, node_index, leaf, tree_id }
+
+  Compute Units: 480
+
+  https://www.alchemy.com/docs/reference/alchemy-das-apis-for-solana/solana-das-api-endpoints/get-asset-proofs
+}

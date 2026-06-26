@@ -1,0 +1,37 @@
+meta {
+  name: reportSpam
+  type: http
+  seq: 20
+}
+
+get {
+  url: https://eth-mainnet.g.alchemy.com/nft/v3/{{api_key}}/reportSpam?address=0x495f947276749ce646f68ac8c248420045cb7b5e&isSpam=true
+  body: none
+  auth: none
+}
+
+params:query {
+  address: 0x495f947276749ce646f68ac8c248420045cb7b5e
+  isSpam: true
+}
+
+headers {
+  Content-Type: application/json
+}
+
+docs {
+  Reports a contract address as spam or not spam.
+  Available on Mainnet for: Ethereum, Polygon, Arbitrum, Optimism, Base, Avalanche,
+  BNB Chain, Gnosis, zkSync, Worldchain, Unichain, and Blast.
+
+  Path Parameters:
+  - apiKey (string, required): Your Alchemy API key
+
+  Query Parameters:
+  - address (string, required): The blockchain address to report
+  - isSpam (boolean, required): Set to true to mark as spam, false to unmark
+
+  Returns: "Address was successfully reported as spam"
+
+  https://www.alchemy.com/docs/reference/nft-api-endpoints/nft-api-endpoints/nft-spam-endpoints/report-spam-v-3
+}

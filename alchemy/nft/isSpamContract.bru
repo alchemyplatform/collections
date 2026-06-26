@@ -1,0 +1,36 @@
+meta {
+  name: isSpamContract
+  type: http
+  seq: 18
+}
+
+get {
+  url: https://eth-mainnet.g.alchemy.com/nft/v3/{{api_key}}/isSpamContract?contractAddress=0x495f947276749ce646f68ac8c248420045cb7b5e
+  body: none
+  auth: none
+}
+
+params:query {
+  contractAddress: 0x495f947276749ce646f68ac8c248420045cb7b5e
+}
+
+headers {
+  Content-Type: application/json
+}
+
+docs {
+  Determines whether a given NFT contract is flagged as spam by Alchemy.
+  Requires a paid tier account.
+  Available on Mainnet for: Base, Arbitrum, Optimism, Ethereum, Polygon, Worldchain,
+  Avax, BNB, Gnosis, Zksync, Unichain, and Blast.
+
+  Path Parameters:
+  - apiKey (string, required): Your Alchemy API key
+
+  Query Parameters:
+  - contractAddress (string, required): NFT contract address (ERC721 and ERC1155 supported)
+
+  Returns: { isSpamContract: boolean }
+
+  https://www.alchemy.com/docs/reference/nft-api-endpoints/nft-api-endpoints/nft-spam-endpoints/is-spam-contract-v-3
+}

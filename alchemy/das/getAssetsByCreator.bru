@@ -1,0 +1,60 @@
+meta {
+  name: getAssetsByCreator
+  type: http
+  seq: 8
+}
+
+post {
+  url: https://solana-mainnet.g.alchemy.com/v2/{{api_key}}
+  body: json
+  auth: none
+}
+
+headers {
+  Content-Type: application/json
+}
+
+body:json {
+  {
+    "jsonrpc": "2.0",
+    "id": "bru",
+    "method": "getAssetsByCreator",
+    "params": {
+      "creatorAddress": "9zsduBRp3VyGKaqim3b17dER3Z8fGCE1UYs4FNrqn1Km",
+      "onlyVerified": false,
+      "sortBy": {
+        "sortBy": "created",
+        "sortDirection": "asc"
+      },
+      "limit": 100,
+      "page": 1,
+      "options": {
+        "showUnverifiedCollections": false,
+        "showCollectionMetadata": false,
+        "showZeroBalance": false,
+        "showInscription": false,
+        "showFungible": false
+      }
+    }
+  }
+}
+
+docs {
+  Returns the list of assets given a creator address.
+
+  Parameters:
+  - creatorAddress (string, required): Base-58 encoded public key identifying the asset creator
+  - onlyVerified (boolean, optional): Filter to only verified creators; default false
+  - sortBy (object, optional): Sorting criteria
+    - sortBy (string): "created", "updated", "recent_action", or "none"
+    - sortDirection (string): "asc" or "desc"
+  - limit (integer, optional): Max assets to retrieve; default 100, max 1000
+  - page (integer, optional): Page index; default 1
+  - before (string, optional): Cursor for assets before this point
+  - after (string, optional): Cursor for assets after this point
+  - options (object, optional): Display flags (showUnverifiedCollections, showCollectionMetadata, showZeroBalance, showInscription, showFungible)
+
+  Returns: { total, limit, page, items: Asset[] }
+
+  https://www.alchemy.com/docs/reference/alchemy-das-apis-for-solana/solana-das-api-endpoints/get-assets-by-creator
+}

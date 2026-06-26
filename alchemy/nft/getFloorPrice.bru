@@ -1,0 +1,36 @@
+meta {
+  name: getFloorPrice
+  type: http
+  seq: 21
+}
+
+get {
+  url: https://eth-mainnet.g.alchemy.com/nft/v3/{{api_key}}/getFloorPrice?contractAddress=0x1f02bf9dde7c79137a08b2dd4fc964bfd2499734
+  body: none
+  auth: none
+}
+
+params:query {
+  contractAddress: 0x1f02bf9dde7c79137a08b2dd4fc964bfd2499734
+  ~collectionSlug: boredapeyachtclub
+}
+
+headers {
+  Content-Type: application/json
+}
+
+docs {
+  Retrieves the floor price of an NFT collection by marketplace.
+  Available on Ethereum mainnet only. Supported marketplaces: OpenSea and Looksrare.
+
+  Path Parameters:
+  - apiKey (string, required): Your Alchemy API key
+
+  Query Parameters:
+  - contractAddress (string, required): NFT contract address (ERC721 and ERC1155 supported)
+  - collectionSlug (string, optional): OpenSea slug for the NFT collection
+
+  Returns: Object with per-marketplace data including floorPrice, priceCurrency, collectionUrl, retrievedAt
+
+  https://www.alchemy.com/docs/reference/nft-api-endpoints/nft-api-endpoints/nft-sales-endpoints/get-floor-price-v-3
+}

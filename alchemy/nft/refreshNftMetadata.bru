@@ -1,0 +1,40 @@
+meta {
+  name: refreshNftMetadata
+  type: http
+  seq: 14
+}
+
+post {
+  url: https://eth-mainnet.g.alchemy.com/nft/v3/{{api_key}}/refreshNftMetadata
+  body: json
+  auth: none
+}
+
+headers {
+  Content-Type: application/json
+}
+
+body:json {
+  {
+    "contractAddress": "0xe785E82358879F061BC3dcAC6f0444462D4b5330",
+    "tokenId": "44"
+  }
+}
+
+docs {
+  Requests a metadata cache refresh for a specific NFT token.
+  Supported on Ethereum (Mainnet & Sepolia), Polygon (Mainnet, Mumbai & Amoy),
+  Arbitrum One, Optimism, and Base mainnets. For other chains use getNFTMetadata
+  with refreshCache: true.
+
+  Path Parameters:
+  - apiKey (string, required): Your Alchemy API key
+
+  Body Parameters:
+  - contractAddress (string, required): NFT contract address
+  - tokenId (string, required): Token ID in hex or decimal format
+
+  Returns: { status: "Queued", estimatedMsToRefresh: string }
+
+  https://www.alchemy.com/docs/reference/nft-api-endpoints/nft-api-endpoints/nft-metadata-endpoints/refresh-nft-metadata-v-3
+}

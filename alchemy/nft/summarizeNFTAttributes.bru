@@ -1,0 +1,34 @@
+meta {
+  name: summarizeNFTAttributes
+  type: http
+  seq: 15
+}
+
+get {
+  url: https://eth-mainnet.g.alchemy.com/nft/v3/{{api_key}}/summarizeNFTAttributes?contractAddress=0xe785E82358879F061BC3dcAC6f0444462D4b5330
+  body: none
+  auth: none
+}
+
+params:query {
+  contractAddress: 0xe785E82358879F061BC3dcAC6f0444462D4b5330
+}
+
+headers {
+  Content-Type: application/json
+}
+
+docs {
+  Generates a summary of attribute prevalence for an NFT collection.
+  Only available on Ethereum mainnet and Polygon mainnet/mumbai.
+
+  Path Parameters:
+  - apiKey (string, required): Your Alchemy API key
+
+  Query Parameters:
+  - contractAddress (string, required): NFT contract address (ERC721 and ERC1155 supported)
+
+  Returns: { totalSupply, summary: { [trait_type]: { [value]: count } }, contractAddress }
+
+  https://www.alchemy.com/docs/reference/nft-api-endpoints/nft-api-endpoints/nft-metadata-endpoints/summarize-nft-attributes-v-3
+}

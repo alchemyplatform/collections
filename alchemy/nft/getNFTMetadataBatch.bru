@@ -1,0 +1,48 @@
+meta {
+  name: getNFTMetadataBatch
+  type: http
+  seq: 9
+}
+
+post {
+  url: https://eth-mainnet.g.alchemy.com/nft/v3/{{api_key}}/getNFTMetadataBatch
+  body: json
+  auth: none
+}
+
+headers {
+  Content-Type: application/json
+}
+
+body:json {
+  {
+    "tokens": [
+      {
+        "contractAddress": "0xe785E82358879F061BC3dcAC6f0444462D4b5330",
+        "tokenId": "44",
+        "tokenType": "string"
+      }
+    ],
+    "tokenUriTimeoutInMs": 1,
+    "refreshCache": false
+  }
+}
+
+docs {
+  Retrieves metadata for up to 100 NFTs in a single request.
+
+  Path Parameters:
+  - apiKey (string, required): Your Alchemy API key
+
+  Body Parameters:
+  - tokens (array, required): List of token objects to batch request metadata for; max 100
+    - contractAddress (string, required): NFT contract address
+    - tokenId (string, required): Token ID in hex or decimal format
+    - tokenType (string, optional): "ERC721" or "ERC1155"
+  - tokenUriTimeoutInMs (integer, optional): Metadata fetch timeout; set 0 for cache-only
+  - refreshCache (boolean, optional): Force metadata refresh; defaults to false
+
+  Returns: Array of NFT metadata objects
+
+  https://www.alchemy.com/docs/reference/nft-api-endpoints/nft-api-endpoints/nft-metadata-endpoints/get-nft-metadata-batch-v-3
+}

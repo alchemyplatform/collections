@@ -1,0 +1,35 @@
+meta {
+  name: isHolderOfContract
+  type: http
+  seq: 4
+}
+
+get {
+  url: https://eth-mainnet.g.alchemy.com/nft/v3/{{api_key}}/isHolderOfContract?wallet=0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045&contractAddress=0xe785E82358879F061BC3dcAC6f0444462D4b5330
+  body: none
+  auth: none
+}
+
+params:query {
+  wallet: 0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045
+  contractAddress: 0xe785E82358879F061BC3dcAC6f0444462D4b5330
+}
+
+headers {
+  Content-Type: application/json
+}
+
+docs {
+  Checks whether a specific wallet holds any NFT from a given contract.
+
+  Path Parameters:
+  - apiKey (string, required): Your Alchemy API key
+
+  Query Parameters:
+  - wallet (string, required): Wallet address to check for NFT ownership
+  - contractAddress (string, required): NFT contract address (ERC721 and ERC1155 supported)
+
+  Returns: { isHolderOfContract: boolean }
+
+  https://www.alchemy.com/docs/reference/nft-api-endpoints/nft-api-endpoints/nft-ownership-endpoints/is-holder-of-contract-v-3
+}

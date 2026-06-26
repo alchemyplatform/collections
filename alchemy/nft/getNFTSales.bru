@@ -1,0 +1,54 @@
+meta {
+  name: getNFTSales
+  type: http
+  seq: 22
+}
+
+get {
+  url: https://eth-mainnet.g.alchemy.com/nft/v3/{{api_key}}/getNFTSales
+  body: none
+  auth: none
+}
+
+params:query {
+  ~fromBlock: 0
+  ~toBlock: latest
+  ~order: asc
+  ~marketplace: seaport
+  ~contractAddress:
+  ~tokenId: 44
+  ~buyerAddress:
+  ~sellerAddress:
+  ~taker: BUYER
+  ~limit: 1000
+  ~pageKey:
+}
+
+headers {
+  Content-Type: application/json
+}
+
+docs {
+  Retrieves NFT sales data across marketplaces.
+  Supported networks: eth-mainnet, polygon-mainnet, opt-mainnet.
+
+  Path Parameters:
+  - apiKey (string, required): Your Alchemy API key
+
+  Query Parameters:
+  - fromBlock (string, optional): Start block; decimal, hex, or "latest"; defaults to "0"
+  - toBlock (string, optional): End block; decimal, hex, or "latest"; defaults to "latest"
+  - order (enum, optional): "asc" or "desc"; defaults to "asc"
+  - marketplace (enum, optional): "seaport", "wyvern", "looksrare", "x2y2", "blur", "cryptopunks"
+  - contractAddress (string, optional): Filter by NFT collection contract address
+  - tokenId (string, optional): Filter by specific token ID within the contract
+  - buyerAddress (string, optional): Filter by buyer wallet address
+  - sellerAddress (string, optional): Filter by seller wallet address
+  - taker (enum, optional): "BUYER" or "SELLER" as price taker
+  - limit (integer, optional): Max results; max and default 1000
+  - pageKey (string, optional): Pagination token from previous response
+
+  Returns: { nftSales, pageKey, validAt }
+
+  https://www.alchemy.com/docs/reference/nft-api-endpoints/nft-api-endpoints/nft-sales-endpoints/get-nft-sales-v-3
+}

@@ -1,0 +1,56 @@
+meta {
+  name: searchAssets
+  type: http
+  seq: 9
+}
+
+post {
+  url: https://solana-mainnet.g.alchemy.com/v2/{{api_key}}
+  body: json
+  auth: none
+}
+
+headers {
+  Content-Type: application/json
+}
+
+body:json {
+  {
+    "jsonrpc": "2.0",
+    "id": "bru",
+    "method": "searchAssets",
+    "params": {
+      "ownerAddress": "86xCnPeV69n6t3DnyGvkKobf9FdN2H9oiVDdaMpo2MMY",
+      "tokenType": "all",
+      "sortBy": {
+        "sortBy": "created",
+        "sortDirection": "asc"
+      },
+      "page": 1,
+      "limit": 50
+    }
+  }
+}
+
+docs {
+  Returns the list of assets given any arbitrary search criteria.
+  Note: ownerAddress is required by the Alchemy DAS proxy on every call.
+
+  Parameters:
+  - ownerAddress (string, required): The owner address to filter by (required by Alchemy proxy)
+  - tokenType (enum, optional): "fungible", "nonFungible", "regularNFT", "compressedNFT", or "all"
+  - sortBy (object, optional): Sorting criteria
+    - sortBy (string): "created", "updated", "recent_action", or "none"
+    - sortDirection (string): "asc" or "desc"
+  - limit (integer, optional): Max results 1-1000; default 100
+  - page (integer, optional): Page index 1-indexed; default 1
+  - cursor (string, optional): Pagination cursor from previous response
+  - creatorAddress (string, optional): Filter by creator public key
+  - frozen (boolean, optional): Filter by frozen status
+  - compressed (boolean, optional): Filter for state-compressed NFTs
+  - options (object, optional): Display flags (showUnverifiedCollections, showCollectionMetadata, showZeroBalance, showInscription, showFungible)
+
+  Returns: { total, limit, page, items: Asset[] }
+
+  https://www.alchemy.com/docs/reference/alchemy-das-apis-for-solana/solana-das-api-endpoints/search-assets
+}

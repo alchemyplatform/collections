@@ -1,0 +1,44 @@
+meta {
+  name: getAssetSignatures
+  type: http
+  seq: 10
+}
+
+post {
+  url: https://solana-mainnet.g.alchemy.com/v2/{{api_key}}
+  body: json
+  auth: none
+}
+
+headers {
+  Content-Type: application/json
+}
+
+body:json {
+  {
+    "jsonrpc": "2.0",
+    "id": "bru",
+    "method": "getAssetSignatures",
+    "params": {
+      "id": "FNt6A9Mfnqbwc1tY7uwAguKQ1JcpBrxmhczDgbdJy5AC",
+      "limit": 100,
+      "page": 1
+    }
+  }
+}
+
+docs {
+  Returns the transaction signatures associated with a compressed asset.
+
+  Parameters:
+  - id (string, required): The ID of the asset to get signatures for
+  - limit (integer, optional): Max signatures to retrieve; default 100, max 1000
+  - page (integer, optional): Page index; default 1
+  - before (string, optional): Cursor to retrieve signatures before a point
+  - after (string, optional): Cursor to retrieve signatures after a point
+  - tree (string, optional): Merkle tree address filter
+
+  Returns: { total, limit, page, items: [{ signature, slot, blockTime, type, tree }] }
+
+  https://www.alchemy.com/docs/reference/alchemy-das-apis-for-solana/solana-das-api-endpoints/get-asset-signatures
+}

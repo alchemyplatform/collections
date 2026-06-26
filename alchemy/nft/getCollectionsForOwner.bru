@@ -1,0 +1,43 @@
+meta {
+  name: getCollectionsForOwner
+  type: http
+  seq: 6
+}
+
+get {
+  url: https://eth-mainnet.g.alchemy.com/nft/v3/{{api_key}}/getCollectionsForOwner?owner=0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045&withMetadata=true&pageSize=100
+  body: none
+  auth: none
+}
+
+params:query {
+  owner: 0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045
+  ~withMetadata: true
+  ~pageKey:
+  ~pageSize: 100
+  ~excludeFilters[]: SPAM
+}
+
+headers {
+  Content-Type: application/json
+}
+
+docs {
+  Retrieves all NFT collections held by an owner address.
+  Supported on Ethereum only. For other chains use getContractsForOwner.
+
+  Path Parameters:
+  - apiKey (string, required): Your Alchemy API key
+
+  Query Parameters:
+  - owner (string, required): Wallet address or ENS name (Ethereum Mainnet only)
+  - pageKey (string, optional): Pagination token from previous response
+  - pageSize (integer, optional): Results per page; default 100, max 100
+  - withMetadata (boolean, optional): Include full metadata; defaults to true
+  - includeFilters[] (enum[], optional): Include only "SPAM" or "AIRDROPS"
+  - excludeFilters[] (enum[], optional): Exclude "SPAM" or "AIRDROPS"
+
+  Returns: { collections, pageKey, totalCount }
+
+  https://www.alchemy.com/docs/reference/nft-api-endpoints/nft-api-endpoints/nft-ownership-endpoints/get-collections-for-owner-v-3
+}

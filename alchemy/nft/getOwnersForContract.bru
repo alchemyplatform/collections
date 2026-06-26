@@ -1,0 +1,37 @@
+meta {
+  name: getOwnersForContract
+  type: http
+  seq: 3
+}
+
+get {
+  url: https://eth-mainnet.g.alchemy.com/nft/v3/{{api_key}}/getOwnersForContract?contractAddress=0x495f947276749ce646f68ac8c248420045cb7b5e&withTokenBalances=false
+  body: none
+  auth: none
+}
+
+params:query {
+  contractAddress: 0x495f947276749ce646f68ac8c248420045cb7b5e
+  ~withTokenBalances: false
+  ~pageKey:
+}
+
+headers {
+  Content-Type: application/json
+}
+
+docs {
+  Retrieves all owners of a given NFT contract.
+
+  Path Parameters:
+  - apiKey (string, required): Your Alchemy API key
+
+  Query Parameters:
+  - contractAddress (string, required): NFT contract address (ERC721 and ERC1155 supported)
+  - withTokenBalances (boolean, optional): Include token balances per token ID for each owner; defaults to false
+  - pageKey (string, optional): Pagination token for contracts with >50,000 owners
+
+  Returns: { owners, pageKey }
+
+  https://www.alchemy.com/docs/data/nft-api/api-reference/nft-ownership-endpoints/get-owners-for-contract-v-3
+}
