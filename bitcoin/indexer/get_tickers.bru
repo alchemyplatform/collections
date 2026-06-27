@@ -1,0 +1,34 @@
+meta {
+  name: Get Tickers
+  type: http
+  seq: 11
+}
+
+get {
+  url: https://bitcoin-mainnet.g.alchemy.com/v2/{{api_key}}/api/v2/tickers/
+  body: none
+  auth: none
+}
+
+params:query {
+  ~currency: usd
+  ~timestamp: 1578391200
+  ~block:
+  ~token:
+}
+
+docs {
+  Returns currency rates for the requested currency and date. If a rate is unavailable for the exact timestamp, the closest available rate can be returned. Responses include the actual rate timestamp.
+
+  Query Parameters:
+  - currency (string, optional) - Currency code. When omitted, all available rates can be returned.
+  - timestamp (integer, optional) - Unix timestamp for historical rates. Omit to return the latest.
+  - block (string, optional) - Block height or hash whose timestamp should be used for historical rates.
+  - token (string, optional) - Token symbol or contract/address key for token-specific rates.
+
+  Returns exchange rate information including:
+  - rates object with currency codes as keys and numeric exchange rates as values
+  - ts timestamp of the returned rate data
+
+  A rate of -1 marks an unavailable or invalid currency for that timestamp.
+}

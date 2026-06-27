@@ -1,0 +1,38 @@
+meta {
+  name: Get UTXOs
+  type: http
+  seq: 6
+}
+
+get {
+  url: https://bitcoin-mainnet.g.alchemy.com/v2/{{api_key}}/api/v2/utxo/:descriptor
+  body: none
+  auth: none
+}
+
+params:path {
+  descriptor: bc1qwfgdjyy95aay2686fn74h6a4nu9eev6np7q4fn204dkj3274frlqrskvx0
+}
+
+params:query {
+  ~confirmed: true
+  ~gap: 20
+}
+
+docs {
+  Returns unspent transaction outputs (UTXOs) for a Bitcoin address, xpub, or output descriptor.
+
+  Parameters:
+  1. descriptor (string, required) - Address, xpub, or output descriptor to query.
+
+  Query Parameters:
+  - confirmed (boolean, optional, defaults to false) - When true, exclude unconfirmed UTXOs.
+  - gap (integer, optional) - XPUB or descriptor derivation gap limit. Values are capped by the server (max 10000).
+
+  Returns an array of UTXOs including:
+  - Transaction ID, vout, value, and output address
+  - Block height, confirmations, and lockTime
+  - coinbase flag and derivation path (when querying by xpub or descriptor)
+
+  Useful for constructing new transactions by selecting unspent outputs.
+}

@@ -1,0 +1,24 @@
+meta {
+  name: Get Block Hash
+  type: http
+  seq: 1
+}
+
+get {
+  url: https://bitcoin-mainnet.g.alchemy.com/v2/{{api_key}}/api/v2/block-index/:block_height
+  body: none
+  auth: none
+}
+
+params:path {
+  block_height: 860730
+}
+
+docs {
+  Returns the block hash for a given block height.
+
+  Parameters:
+  1. block_height (integer, required) - Block height as a non-negative integer.
+
+  Returns the hex-encoded blockHash for the requested height.
+}

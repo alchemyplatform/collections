@@ -1,0 +1,41 @@
+meta {
+  name: Subscribe Addresses
+  type: ws
+  seq: 3
+}
+
+ws {
+  url: wss://bitcoin-mainnet.g.alchemy.com/v2/{{api_key}}
+  body: ws
+  auth: inherit
+}
+
+body:ws {
+  name: subscribe
+  type: json
+  content: '''
+    {
+      "id": "3",
+      "method": "subscribeAddresses",
+      "params": {
+        "addresses": [
+          "bc1qmgwnfjlda4ns3g6g3yz74w6scnn9yu2ts82yyc",
+          "1Nb1ykSD7J5k4RFjJQGsrD9gxBE6jzfNa9"
+        ],
+        "newBlockTxs": true
+      }
+    }
+  '''
+}
+
+docs {
+  Emits an event when a new transaction touches any of the supplied addresses.
+
+  Parameters:
+  - addresses (string[], required) - One or more addresses to watch. Sending a new subscribeAddresses request replaces the previous list.
+  - newBlockTxs (boolean, optional) - When true, also emits when watched transactions confirm in a new block. Defaults to false.
+
+  On subscribe, returns a confirmation that the subscription is active. Subsequent events include the affected address and normalized transaction details.
+
+  https://www.alchemy.com/docs/bitcoin/utxo-websockets#subscribeaddresses
+}

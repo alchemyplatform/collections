@@ -1,0 +1,28 @@
+meta {
+  name: Get Tickers List
+  type: http
+  seq: 10
+}
+
+get {
+  url: https://bitcoin-mainnet.g.alchemy.com/v2/{{api_key}}/api/v2/tickers-list/?timestamp=1578391200
+  body: none
+  auth: none
+}
+
+params:query {
+  timestamp: 1578391200
+  ~token:
+}
+
+docs {
+  Returns available secondary currencies for a date together with the actual rate timestamp.
+
+  Query Parameters:
+  - timestamp (integer, required) - Unix timestamp for the requested currency list.
+  - token (string, optional) - Token symbol or contract/address key for token-specific currency lists.
+
+  Returns ticker availability information including:
+  - available_currencies array of supported fiat currency codes
+  - ts timestamp of the available rates
+}

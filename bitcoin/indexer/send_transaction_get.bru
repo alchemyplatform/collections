@@ -1,0 +1,26 @@
+meta {
+  name: Send Transaction (GET)
+  type: http
+  seq: 8
+}
+
+get {
+  url: https://bitcoin-mainnet.g.alchemy.com/v2/{{api_key}}/api/v2/sendtx/:hex
+  body: none
+  auth: none
+}
+
+params:path {
+  hex: 02000000000101662a2fc609ddb4ebf96113d237041d687c94494f44c10d8dc8e23d3774b5b70e0100000000fdffffff0298ab0200000000001976a914ecc999d554eaa3efa5e871c28f58b549c36ec51788ac64e196000000000016001496f152a0919487624bf4f13f46f0d20fa10d9acc0247304402202bb0591180cdbbe0f639af6eb21abdb993fc5a667b09e6392d5c11b025a9187102201ef2e84fc91a5d2c6fbbc9f943482d230256a3640f8ecb83c1f3f17242cf011001210314f03889e1667feb696ee280625943195189cfabe46d54204d987f631fe6892739220d00
+}
+
+docs {
+  Broadcasts a signed raw transaction to the Bitcoin network via a GET request.
+
+  Parameters:
+  1. hex (string, required) - Hex-encoded raw transaction bytes.
+
+  Returns a result string containing the transaction ID of the broadcast transaction.
+
+  Use send_transaction_post for large transactions that exceed URL length limits.
+}

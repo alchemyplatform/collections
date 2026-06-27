@@ -1,0 +1,22 @@
+meta {
+  name: Get Transaction Specific
+  type: http
+  seq: 3
+}
+
+get {
+  url: https://bitcoin-mainnet.g.alchemy.com/v2/{{api_key}}/api/v2/tx-specific/:txid
+  body: none
+  auth: none
+}
+
+params:path {
+  txid: 8c1e3dec662d1f2a5e322ccef5eca263f98eb16723c6f990be0c88c1db113fb1
+}
+
+docs {
+  Returns transaction data in the exact format returned by the underlying coin backend, including all chain-specific fields not surfaced by the normalized /tx/{txid} endpoint.
+
+  Parameters:
+  1. txid (string, required) - Hex-encoded transaction identifier.
+}

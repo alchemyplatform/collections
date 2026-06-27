@@ -1,0 +1,33 @@
+meta {
+  name: Subscribe New Block
+  type: ws
+  seq: 1
+}
+
+ws {
+  url: wss://bitcoin-mainnet.g.alchemy.com/v2/{{api_key}}
+  body: ws
+  auth: inherit
+}
+
+body:ws {
+  name: subscribe
+  type: json
+  content: '''
+    {
+      "id": "1",
+      "method": "subscribeNewBlock",
+      "params": {}
+    }
+  '''
+}
+
+docs {
+  Emits an event each time a new block is added to the chain.
+
+  On subscribe, returns a confirmation that the subscription is active. Subsequent events include the block height and hash.
+
+  When the chain reorganizes, you may see multiple events at the same height; treat the latest as canonical.
+
+  https://www.alchemy.com/docs/bitcoin/utxo-websockets#subscribenewblock
+}

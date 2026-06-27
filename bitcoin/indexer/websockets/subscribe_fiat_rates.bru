@@ -1,0 +1,37 @@
+meta {
+  name: Subscribe Fiat Rates
+  type: ws
+  seq: 4
+}
+
+ws {
+  url: wss://bitcoin-mainnet.g.alchemy.com/v2/{{api_key}}
+  body: ws
+  auth: inherit
+}
+
+body:ws {
+  name: subscribe
+  type: json
+  content: '''
+    {
+      "id": "4",
+      "method": "subscribeFiatRates",
+      "params": {
+        "currency": "usd"
+      }
+    }
+  '''
+}
+
+docs {
+  Emits an event when the fiat rate ticker for the chain's native asset updates.
+
+  Parameters:
+  - currency (string, optional) - Filter to a single fiat currency (e.g. "usd", "eur"). When omitted, the server emits all available currencies on each update.
+  - tokens (string[], optional) - Filter to specific token symbols or contract/address keys.
+
+  On subscribe, returns a confirmation that the subscription is active. Subsequent events include updated fiat rates for the requested currency or currencies.
+
+  https://www.alchemy.com/docs/bitcoin/utxo-websockets#subscribefiatrates
+}

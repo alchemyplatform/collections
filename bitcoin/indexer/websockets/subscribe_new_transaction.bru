@@ -1,0 +1,33 @@
+meta {
+  name: Subscribe New Transaction
+  type: ws
+  seq: 2
+}
+
+ws {
+  url: wss://bitcoin-mainnet.g.alchemy.com/v2/{{api_key}}
+  body: ws
+  auth: inherit
+}
+
+body:ws {
+  name: subscribe
+  type: json
+  content: '''
+    {
+      "id": "2",
+      "method": "subscribeNewTransaction",
+      "params": {}
+    }
+  '''
+}
+
+docs {
+  Emits every new transaction added to the blockchain, across all addresses.
+
+  On subscribe, returns a confirmation that the subscription is active. Subsequent events include normalized transaction details.
+
+  This is a high-volume firehose subscription and may not be enabled on all networks. If you do not receive events after subscribing, use subscribeAddresses for targeted updates instead.
+
+  https://www.alchemy.com/docs/bitcoin/utxo-websockets#subscribenewtransaction
+}
