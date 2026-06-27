@@ -1,0 +1,35 @@
+meta {
+  name: invalidateContract
+  type: http
+  seq: 13
+}
+
+get {
+  url: https://eth-mainnet.g.alchemy.com/nft/v3/{{api_key}}/invalidateContract?contractAddress=0xe785E82358879F061BC3dcAC6f0444462D4b5330
+  body: none
+  auth: none
+}
+
+params:query {
+  contractAddress: 0xe785E82358879F061BC3dcAC6f0444462D4b5330
+}
+
+headers {
+  Content-Type: application/json
+}
+
+docs {
+  Marks all cached tokens for the specified contract as stale, ensuring the next query
+  fetches live data instead of cached data. Use after collection reveals.
+  Available on Ethereum, Polygon, Arbitrum, Optimism, and Base.
+
+  Path Parameters:
+  - apiKey (string, required): Your Alchemy API key
+
+  Query Parameters:
+  - contractAddress (string, required): NFT contract address (ERC721 and ERC1155 supported)
+
+  Returns: { success: string, numTokensInvalidated: number }
+
+  https://www.alchemy.com/docs/reference/nft-api-endpoints/nft-api-endpoints/nft-metadata-endpoints/invalidate-contract-v-3
+}

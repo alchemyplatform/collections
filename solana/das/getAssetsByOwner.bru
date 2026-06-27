@@ -1,0 +1,63 @@
+meta {
+  name: getAssetsByOwner
+  type: http
+  seq: 6
+}
+
+post {
+  url: https://solana-mainnet.g.alchemy.com/v2/{{api_key}}
+  body: json
+  auth: none
+}
+
+headers {
+  Content-Type: application/json
+}
+
+body:json {
+  {
+    "jsonrpc": "2.0",
+    "id": "bru",
+    "method": "getAssetsByOwner",
+    "params": {
+      "ownerAddress": "86xCnPeV69n6t3DnyGvkKobf9FdN2H9oiVDdaMpo2MMY",
+      "sortBy": {
+        "sortBy": "id",
+        "sortDirection": "asc"
+      },
+      "limit": 5,
+      "page": 1,
+      "options": {
+        "showUnverifiedCollections": false,
+        "showCollectionMetadata": false,
+        "showZeroBalance": false,
+        "showInscription": false,
+        "showFungible": false
+      }
+    }
+  }
+}
+
+docs {
+  Returns the list of assets given an owner address.
+
+  Parameters:
+  - ownerAddress (string, required): The owner address to filter assets by
+  - sortBy (object, optional): Sorting criteria
+    - sortBy (string): "id", "created", "updated", "recent_action", or "none" (only "id" supports cursor pagination)
+    - sortDirection (string): "asc" or "desc"
+  - limit (integer, optional): Max assets to retrieve; default 100, max 1000
+  - page (integer, optional): Page index for non-id sorting; default 1
+  - before (string, optional): Cursor for assets before this point (only with sortBy: "id")
+  - after (string, optional): Cursor for assets after this point (only with sortBy: "id")
+  - options (object, optional): Display flags
+    - showUnverifiedCollections (boolean, default: false)
+    - showCollectionMetadata (boolean, default: false)
+    - showZeroBalance (boolean, default: false)
+    - showInscription (boolean, default: false)
+    - showFungible (boolean, default: false)
+
+  Returns: { total, limit, page, items: Asset[] }
+
+  https://www.alchemy.com/docs/reference/alchemy-das-apis-for-solana/solana-das-api-endpoints/get-assets-by-owner
+}

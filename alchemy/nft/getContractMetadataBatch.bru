@@ -1,0 +1,38 @@
+meta {
+  name: getContractMetadataBatch
+  type: http
+  seq: 11
+}
+
+post {
+  url: https://eth-mainnet.g.alchemy.com/nft/v3/{{api_key}}/getContractMetadataBatch
+  body: json
+  auth: none
+}
+
+headers {
+  Content-Type: application/json
+}
+
+body:json {
+  {
+    "contractAddresses": [
+      "0xe785E82358879F061BC3dcAC6f0444462D4b5330",
+      "0xbc4ca0eda7647a8ab7c2061c2e118a18a936f13d"
+    ]
+  }
+}
+
+docs {
+  Retrieves contract metadata for multiple NFT contracts in a single request.
+
+  Path Parameters:
+  - apiKey (string, required): Your Alchemy API key
+
+  Body Parameters:
+  - contractAddresses (string[], required): List of NFT contract addresses to batch request metadata for
+
+  Returns: Array of contract metadata objects, each containing address, name, symbol, totalSupply, tokenType, contractDeployer, deployedBlockNumber, and openseaMetadata
+
+  https://www.alchemy.com/docs/reference/nft-api-endpoints/nft-api-endpoints/nft-metadata-endpoints/get-contract-metadata-batch-v-3
+}

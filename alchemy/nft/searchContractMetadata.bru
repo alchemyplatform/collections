@@ -1,0 +1,35 @@
+meta {
+  name: searchContractMetadata
+  type: http
+  seq: 16
+}
+
+get {
+  url: https://eth-mainnet.g.alchemy.com/nft/v3/{{api_key}}/searchContractMetadata?query=bored
+  body: none
+  auth: none
+}
+
+params:query {
+  query: bored
+}
+
+headers {
+  Content-Type: application/json
+}
+
+docs {
+  Searches the metadata across all ERC-721 and ERC-1155 contracts for specific keywords.
+  Beta endpoint. Available on Ethereum, Polygon, Arbitrum, Optimism, and Base.
+
+  Path Parameters:
+  - apiKey (string, required): Your Alchemy API key
+
+  Query Parameters:
+  - query (string, required): The search string to match against contract metadata
+
+  Returns: Array of contract metadata objects matching the search criteria, each containing
+  address, name, symbol, totalSupply, tokenType, contractDeployer, deployedBlockNumber, openseaMetadata
+
+  https://www.alchemy.com/docs/reference/nft-api-endpoints/nft-api-endpoints/nft-metadata-endpoints/search-contract-metadata-v-3
+}

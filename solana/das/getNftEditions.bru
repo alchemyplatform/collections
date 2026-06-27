@@ -1,0 +1,43 @@
+meta {
+  name: getNftEditions
+  type: http
+  seq: 11
+}
+
+post {
+  url: https://solana-mainnet.g.alchemy.com/v2/{{api_key}}
+  body: json
+  auth: none
+}
+
+headers {
+  Content-Type: application/json
+}
+
+body:json {
+  {
+    "jsonrpc": "2.0",
+    "id": "bru",
+    "method": "getNftEditions",
+    "params": {
+      "mintAddress": "Bu1DEKeawy7txbnCEJE4BU3BKLXaNAKCYcHR4XhndGss",
+      "limit": 100,
+      "page": 1
+    }
+  }
+}
+
+docs {
+  Gets information about all the edition NFTs for a specific master NFT.
+
+  Parameters:
+  - mintAddress (string, required): The ID of the master NFT to get editions for
+  - limit (integer, optional): Max editions to retrieve; default 100, max 1000
+  - page (integer, optional): Page index; default 1
+  - before (string, optional): Cursor for editions before this point
+  - after (string, optional): Cursor for editions after this point
+
+  Returns: { total, limit, page, items: Asset[] }
+
+  https://www.alchemy.com/docs/reference/alchemy-das-apis-for-solana/solana-das-api-endpoints/get-nft-editions
+}

@@ -1,0 +1,33 @@
+meta {
+  name: getContractMetadata
+  type: http
+  seq: 10
+}
+
+get {
+  url: https://eth-mainnet.g.alchemy.com/nft/v3/{{api_key}}/getContractMetadata?contractAddress=0xe785E82358879F061BC3dcAC6f0444462D4b5330
+  body: none
+  auth: none
+}
+
+params:query {
+  contractAddress: 0xe785E82358879F061BC3dcAC6f0444462D4b5330
+}
+
+headers {
+  Content-Type: application/json
+}
+
+docs {
+  Retrieves the metadata associated with a given NFT contract.
+
+  Path Parameters:
+  - apiKey (string, required): Your Alchemy API key
+
+  Query Parameters:
+  - contractAddress (string, required): NFT contract address (ERC721 and ERC1155 supported)
+
+  Returns: { address, name, symbol, totalSupply, tokenType, contractDeployer, deployedBlockNumber, openseaMetadata }
+
+  https://www.alchemy.com/docs/reference/nft-api-endpoints/nft-api-endpoints/nft-metadata-endpoints/get-contract-metadata-v-3
+}

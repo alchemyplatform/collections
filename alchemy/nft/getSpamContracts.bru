@@ -1,0 +1,31 @@
+meta {
+  name: getSpamContracts
+  type: http
+  seq: 17
+}
+
+get {
+  url: https://eth-mainnet.g.alchemy.com/nft/v3/{{api_key}}/getSpamContracts
+  body: none
+  auth: none
+}
+
+headers {
+  Content-Type: application/json
+}
+
+docs {
+  Retrieves a list of all NFT contracts marked as spam by Alchemy.
+  Requires a paid tier account.
+  Available on Mainnet for: Base, Arbitrum, Optimism, Ethereum, Polygon, Worldchain,
+  Avax, BNB, Gnosis, Zksync, Unichain, and Blast.
+
+  Path Parameters:
+  - apiKey (string, required): Your Alchemy API key
+
+  No query parameters required.
+
+  Returns: { contractAddresses: string[] }
+
+  https://www.alchemy.com/docs/reference/nft-api-endpoints/nft-api-endpoints/nft-spam-endpoints/get-spam-contracts-v-3
+}

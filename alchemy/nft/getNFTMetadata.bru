@@ -1,0 +1,41 @@
+meta {
+  name: getNFTMetadata
+  type: http
+  seq: 8
+}
+
+get {
+  url: https://eth-mainnet.g.alchemy.com/nft/v3/{{api_key}}/getNFTMetadata?contractAddress=0xe785E82358879F061BC3dcAC6f0444462D4b5330&tokenId=44&refreshCache=false
+  body: none
+  auth: none
+}
+
+params:query {
+  contractAddress: 0xe785E82358879F061BC3dcAC6f0444462D4b5330
+  tokenId: 44
+  ~tokenType: ERC721
+  ~tokenUriTimeoutInMs: 0
+  ~refreshCache: false
+}
+
+headers {
+  Content-Type: application/json
+}
+
+docs {
+  Retrieves the metadata associated with a given NFT.
+
+  Path Parameters:
+  - apiKey (string, required): Your Alchemy API key
+
+  Query Parameters:
+  - contractAddress (string, required): NFT contract address (ERC721 and ERC1155 supported)
+  - tokenId (string, required): Token ID in hex or decimal format
+  - tokenType (string, optional): "ERC721" or "ERC1155"; specifying speeds up the request
+  - tokenUriTimeoutInMs (integer, optional): Metadata fetch timeout; set 0 for cache-only
+  - refreshCache (boolean, optional): Force metadata refresh; defaults to false
+
+  Returns: Full NFT metadata including contract, token info, image, raw metadata, collection, and mint history
+
+  https://www.alchemy.com/docs/reference/nft-api-endpoints/nft-api-endpoints/nft-metadata-endpoints/get-nft-metadata-v-3
+}

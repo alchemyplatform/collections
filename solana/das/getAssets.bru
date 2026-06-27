@@ -1,0 +1,55 @@
+meta {
+  name: getAssets
+  type: http
+  seq: 2
+}
+
+post {
+  url: https://solana-mainnet.g.alchemy.com/v2/{{api_key}}
+  body: json
+  auth: none
+}
+
+headers {
+  Content-Type: application/json
+}
+
+body:json {
+  {
+    "jsonrpc": "2.0",
+    "id": "bru",
+    "method": "getAssets",
+    "params": {
+      "ids": [
+        "Bu1DEKeawy7txbnCEJE4BU3BKLXaNAKCYcHR4XhndGss",
+        "8vw7tdLGE3FBjaetsJrZAbbyssUrXai1aBJbUnj5S5uo"
+      ],
+      "displayOptions": {
+        "showUnverifiedCollections": false,
+        "showCollectionMetadata": false,
+        "showZeroBalance": false,
+        "showInscription": false,
+        "showFungible": false
+      }
+    }
+  }
+}
+
+docs {
+  Returns information about multiple compressed or standard assets in a single request.
+
+  Parameters:
+  - ids (string[], required): An array of asset IDs to retrieve
+  - displayOptions (object, optional): Response shaping flags (alias: options; only one permitted per request)
+    - showUnverifiedCollections (boolean, default: false)
+    - showCollectionMetadata (boolean, default: false)
+    - showZeroBalance (boolean, default: false)
+    - showInscription (boolean, default: false)
+    - showFungible (boolean, default: false)
+
+  Returns: { total, limit, page, items: Asset[] }
+
+  Compute Units: 480
+
+  https://www.alchemy.com/docs/reference/alchemy-das-apis-for-solana/solana-das-api-endpoints/get-assets
+}
