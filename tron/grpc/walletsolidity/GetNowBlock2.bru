@@ -1,0 +1,33 @@
+meta {
+  name: GetNowBlock2
+  type: grpc
+  seq: 2
+}
+
+grpc {
+  url: https://tron-mainnet.g.alchemy.com/
+  method: /protocol.WalletSolidity/GetNowBlock2
+  body: grpc
+  protoPath: grpc/proto/api/api.proto
+  auth: inherit
+  methodType: unary
+}
+
+metadata {
+  X-Token: {{api_key}}
+}
+
+body:grpc {
+  name: message 1
+  content: '''
+    {}
+  '''
+}
+
+docs {
+  Returns the latest **confirmed** block (`BlockExtention`).
+
+  **Service:** `protocol.WalletSolidity` · **Method:** `GetNowBlock2` (unary)
+
+  Request body: empty message.
+}

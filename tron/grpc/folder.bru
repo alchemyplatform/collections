@@ -1,0 +1,29 @@
+meta {
+  name: grpc
+  seq: 1
+}
+
+auth {
+  mode: inherit
+}
+
+docs {
+  TRON gRPC API — unary methods of the `protocol.Wallet` (latest state) and
+  `protocol.WalletSolidity` (confirmed state) services, served through Alchemy.
+
+  **Endpoints:**
+  - Mainnet: `https://tron-mainnet.g.alchemy.com/`
+  - Nile testnet: `https://tron-testnet.g.alchemy.com/`
+
+  **Auth:** send your Alchemy API key as gRPC metadata:
+  `X-Token: <api_key>` (set `api_key` in your Bruno environment).
+
+  **Protos:** the gateway does not expose server reflection, so the real
+  TRON protos are bundled under `grpc/proto/` (source:
+  https://github.com/tronprotocol/protocol). The entrypoint is
+  `grpc/proto/api/api.proto`.
+
+  **Bytes fields:** protobuf JSON encodes `bytes` as base64 of the raw bytes.
+  For a TRON address, base58-decode it (or take the 21-byte hex form starting
+  with `41`) and base64-encode: `echo 41E552...32CD0 | xxd -r -p | base64`.
+}

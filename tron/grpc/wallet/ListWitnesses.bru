@@ -1,0 +1,34 @@
+meta {
+  name: ListWitnesses
+  type: grpc
+  seq: 23
+}
+
+grpc {
+  url: https://tron-mainnet.g.alchemy.com/
+  method: /protocol.Wallet/ListWitnesses
+  body: grpc
+  protoPath: grpc/proto/api/api.proto
+  auth: inherit
+  methodType: unary
+}
+
+metadata {
+  X-Token: {{api_key}}
+}
+
+body:grpc {
+  name: message 1
+  content: '''
+    {}
+  '''
+}
+
+docs {
+  Lists all witnesses (super representatives), including vote counts and
+  production stats.
+
+  **Service:** `protocol.Wallet` · **Method:** `ListWitnesses` (unary)
+
+  Request body: empty message.
+}

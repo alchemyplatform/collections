@@ -1,0 +1,39 @@
+meta {
+  name: GetBlock
+  type: grpc
+  seq: 5
+}
+
+grpc {
+  url: https://tron-mainnet.g.alchemy.com/
+  method: /protocol.Wallet/GetBlock
+  body: grpc
+  protoPath: grpc/proto/api/api.proto
+  auth: inherit
+  methodType: unary
+}
+
+metadata {
+  X-Token: {{api_key}}
+}
+
+body:grpc {
+  name: message 1
+  content: '''
+    {
+      "id_or_num": "74000000",
+      "detail": true
+    }
+  '''
+}
+
+docs {
+  Fetches a block by height or block ID.
+
+  - `id_or_num`: block number (as a string) or block ID; omit for the latest block.
+  - `detail`: `true` returns full transactions, `false` returns only the header.
+
+  **Service:** `protocol.Wallet` · **Method:** `GetBlock` (unary)
+
+
+}

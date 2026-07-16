@@ -1,0 +1,33 @@
+meta {
+  name: TotalTransaction
+  type: grpc
+  seq: 24
+}
+
+grpc {
+  url: https://tron-mainnet.g.alchemy.com/
+  method: /protocol.Wallet/TotalTransaction
+  body: grpc
+  protoPath: grpc/proto/api/api.proto
+  auth: inherit
+  methodType: unary
+}
+
+metadata {
+  X-Token: {{api_key}}
+}
+
+body:grpc {
+  name: message 1
+  content: '''
+    {}
+  '''
+}
+
+docs {
+  Returns the total number of transactions on the network.
+
+  **Service:** `protocol.Wallet` · **Method:** `TotalTransaction` (unary)
+
+  Request body: empty message.
+}

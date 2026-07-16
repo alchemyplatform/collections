@@ -1,0 +1,34 @@
+meta {
+  name: GetChainParameters
+  type: grpc
+  seq: 19
+}
+
+grpc {
+  url: https://tron-mainnet.g.alchemy.com/
+  method: /protocol.Wallet/GetChainParameters
+  body: grpc
+  protoPath: grpc/proto/api/api.proto
+  auth: inherit
+  methodType: unary
+}
+
+metadata {
+  X-Token: {{api_key}}
+}
+
+body:grpc {
+  name: message 1
+  content: '''
+    {}
+  '''
+}
+
+docs {
+  Returns the network's committee-governed chain parameters (fees, limits,
+  proposal-controlled switches).
+
+  **Service:** `protocol.Wallet` · **Method:** `GetChainParameters` (unary)
+
+  Request body: empty message.
+}

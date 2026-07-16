@@ -1,0 +1,33 @@
+meta {
+  name: GetBurnTrx
+  type: grpc
+  seq: 25
+}
+
+grpc {
+  url: https://tron-mainnet.g.alchemy.com/
+  method: /protocol.Wallet/GetBurnTrx
+  body: grpc
+  protoPath: grpc/proto/api/api.proto
+  auth: inherit
+  methodType: unary
+}
+
+metadata {
+  X-Token: {{api_key}}
+}
+
+body:grpc {
+  name: message 1
+  content: '''
+    {}
+  '''
+}
+
+docs {
+  Returns the total amount of TRX burned (in SUN).
+
+  **Service:** `protocol.Wallet` · **Method:** `GetBurnTrx` (unary)
+
+  Request body: empty message.
+}

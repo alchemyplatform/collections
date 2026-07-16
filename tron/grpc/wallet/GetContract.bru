@@ -1,0 +1,40 @@
+meta {
+  name: GetContract
+  type: grpc
+  seq: 17
+}
+
+grpc {
+  url: https://tron-mainnet.g.alchemy.com/
+  method: /protocol.Wallet/GetContract
+  body: grpc
+  protoPath: grpc/proto/api/api.proto
+  auth: inherit
+  methodType: unary
+}
+
+metadata {
+  X-Token: {{api_key}}
+}
+
+body:grpc {
+  name: message 1
+  content: '''
+    {
+      "value": "QaYU+AO2/XgJhqQseOycf3fm3tE8"
+    }
+  '''
+}
+
+docs {
+  Fetches contract metadata (ABI, name, origin address, consume_user_resource_percent)
+  for the given contract address.
+
+  - `value`: the contract address bytes, base64-encoded. Example: USDT (TRC20).
+
+  **Service:** `protocol.Wallet` · **Method:** `GetContract` (unary)
+
+  All `bytes` fields are sent as **base64 of the raw bytes** (protobuf JSON mapping).
+  For a TRON address, base58-decode it (or take the 21-byte hex form starting with `41`)
+  and base64-encode the raw bytes, e.g. `echo 41E552...32CD0 | xxd -r -p | base64`.
+}

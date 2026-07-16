@@ -1,0 +1,33 @@
+meta {
+  name: GetNodeInfo
+  type: grpc
+  seq: 20
+}
+
+grpc {
+  url: https://tron-mainnet.g.alchemy.com/
+  method: /protocol.Wallet/GetNodeInfo
+  body: grpc
+  protoPath: grpc/proto/api/api.proto
+  auth: inherit
+  methodType: unary
+}
+
+metadata {
+  X-Token: {{api_key}}
+}
+
+body:grpc {
+  name: message 1
+  content: '''
+    {}
+  '''
+}
+
+docs {
+  Returns node status: version, current block, peer info, machine info.
+
+  **Service:** `protocol.Wallet` · **Method:** `GetNodeInfo` (unary)
+
+  Request body: empty message.
+}
