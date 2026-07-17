@@ -11,11 +11,19 @@
       {
         "path": "txn-stream/aptos.proto",
         "type": "file"
+      },
+      {
+        "path": "grpc/proto/aptos/indexer/v1/raw_data.proto",
+        "type": "file"
       }
     ],
     "importPaths": [
       {
         "path": "txn-stream",
+        "enabled": true
+      },
+      {
+        "path": "grpc/proto",
         "enabled": true
       }
     ]

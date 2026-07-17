@@ -1,0 +1,62 @@
+meta {
+  name: GetTransactions
+  type: grpc
+  seq: 1
+}
+
+grpc {
+  url: https://aptos-mainnet.g.alchemy.com/
+  method: /aptos.indexer.v1.RawData/GetTransactions
+  body: grpc
+  protoPath: grpc/proto/aptos/indexer/v1/raw_data.proto
+  auth: inherit
+  methodType: server-streaming
+}
+
+metadata {
+  X-Token: {{api_key}}
+}
+
+body:grpc {
+  name: message 1
+  content: '''
+    {
+      "starting_version": "0",
+      "transactions_count": "10",
+      "batch_size": 10
+    }
+  '''
+}
+
+docs {
+  Stream Aptos transactions from the indexer gRPC (Transaction Stream
+  Service) through Alchemy.
+
+  **Service:** `aptos.indexer.v1.RawData`
+  **Method:** `GetTransactions` (server-streaming)
+  **Proto source:** https://github.com/aptos-labs/aptos-core/tree/main/protos/proto/aptos/indexer/v1
+
+  **Request fields (`GetTransactionsRequest`):**
+  - `starting_version` (optional uint64, as string): ledger version to
+    start streaming from. Omit to start from the latest version; `"0"`
+    streams from genesis.
+  - `transactions_count` (optional uint64, as string): total number of
+    transactions to return before the stream ends. Omit for an infinite
+    live stream.
+  - `batch_size` (optional uint64): transactions per
+    `TransactionsResponse` message. Defaults to 1000; requests above
+    1000 are rejected.
+  - `transaction_filter` (optional BooleanTransactionFilter): only
+    stream transactions matching the filter (see
+    `aptos/indexer/v1/filter.proto`).
+
+  **Response stream (`TransactionsResponse`):**
+  - `transactions` (repeated Transaction): the batch of transactions.
+  - `chain_id` (uint64): chain the stream is serving (1 = mainnet,
+    2 = testnet).
+  - `processed_range` (ProcessedRange): first/last ledger version
+    covered by this response.
+
+  To resume after a disconnect, persist the last version you processed
+  and re-subscribe with `starting_version = last_version + 1`.
+}

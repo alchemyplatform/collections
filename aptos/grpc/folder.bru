@@ -1,0 +1,21 @@
+meta {
+  name: grpc
+  seq: 4
+}
+
+auth {
+  mode: inherit
+}
+
+docs {
+  Aptos indexer gRPC (Transaction Stream Service) via Alchemy.
+
+  Endpoints:
+  - Mainnet: `https://aptos-mainnet.g.alchemy.com/`
+  - Testnet: `https://aptos-testnet.g.alchemy.com/`
+
+  Authentication is the same as Alchemy's Solana/Sui gRPC:
+  `X-Token: <api_key>` (set `api_key` in your Bruno environment).
+
+  Proto source: https://github.com/aptos-labs/aptos-core/tree/main/protos/proto/aptos
+}
