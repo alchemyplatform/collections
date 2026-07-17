@@ -97,7 +97,9 @@ The Indexer API provides indexed and aggregated blockchain data through a GraphQ
 
 The Transaction Stream Service provides real-time streaming of transactions from the Aptos blockchain.
 
-**Authentication**: Requires `x-aptos-data-authorization` header with API key. Contact Aptos Labs for access.
+**Service**: `aptos.indexer.v1.RawData/GetTransactions` (server-streaming)
+
+**Authentication**: Requires `authorization: Bearer <key>` header — set `aptos_api_key` in your Bruno environment. Get a key at https://developers.aptoslabs.com/.
 
 **Key Features**:
 - Real-time transaction streaming
