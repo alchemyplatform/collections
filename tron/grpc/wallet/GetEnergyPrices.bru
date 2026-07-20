@@ -1,0 +1,34 @@
+meta {
+  name: GetEnergyPrices
+  type: grpc
+  seq: 21
+}
+
+grpc {
+  url: https://tron-mainnet.g.alchemy.com/
+  method: /protocol.Wallet/GetEnergyPrices
+  body: grpc
+  protoPath: grpc/proto/api/api.proto
+  auth: inherit
+  methodType: unary
+}
+
+metadata {
+  X-Token: {{api_key}}
+}
+
+body:grpc {
+  name: message 1
+  content: '''
+    {}
+  '''
+}
+
+docs {
+  Returns the historical unit price of energy, as `timestamp:price` pairs
+  (price in SUN).
+
+  **Service:** `protocol.Wallet` · **Method:** `GetEnergyPrices` (unary)
+
+  Request body: empty message.
+}

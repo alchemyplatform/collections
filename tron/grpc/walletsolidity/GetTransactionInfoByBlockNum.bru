@@ -1,0 +1,36 @@
+meta {
+  name: GetTransactionInfoByBlockNum
+  type: grpc
+  seq: 7
+}
+
+grpc {
+  url: https://tron-mainnet.g.alchemy.com/
+  method: /protocol.WalletSolidity/GetTransactionInfoByBlockNum
+  body: grpc
+  protoPath: grpc/proto/api/api.proto
+  auth: inherit
+  methodType: unary
+}
+
+metadata {
+  X-Token: {{api_key}}
+}
+
+body:grpc {
+  name: message 1
+  content: '''
+    {
+      "num": 74000000
+    }
+  '''
+}
+
+docs {
+  Returns transaction infos (receipts) for every transaction in the **confirmed**
+  block at the given height.
+
+  **Service:** `protocol.WalletSolidity` · **Method:** `GetTransactionInfoByBlockNum` (unary)
+
+
+}

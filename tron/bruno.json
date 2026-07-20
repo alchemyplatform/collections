@@ -1,0 +1,23 @@
+{
+  "version": "1",
+  "name": "tron",
+  "type": "collection",
+  "ignore": [
+    "node_modules",
+    ".git"
+  ],
+  "protobuf": {
+    "protoFiles": [
+      {
+        "path": "grpc/proto/api/api.proto",
+        "type": "file"
+      }
+    ],
+    "importPaths": [
+      {
+        "path": "grpc/proto",
+        "enabled": true
+      }
+    ]
+  }
+}

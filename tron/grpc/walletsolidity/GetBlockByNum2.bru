@@ -1,0 +1,35 @@
+meta {
+  name: GetBlockByNum2
+  type: grpc
+  seq: 4
+}
+
+grpc {
+  url: https://tron-mainnet.g.alchemy.com/
+  method: /protocol.WalletSolidity/GetBlockByNum2
+  body: grpc
+  protoPath: grpc/proto/api/api.proto
+  auth: inherit
+  methodType: unary
+}
+
+metadata {
+  X-Token: {{api_key}}
+}
+
+body:grpc {
+  name: message 1
+  content: '''
+    {
+      "num": 74000000
+    }
+  '''
+}
+
+docs {
+  Fetches the **confirmed** block at the given height, including transaction IDs.
+
+  **Service:** `protocol.WalletSolidity` · **Method:** `GetBlockByNum2` (unary)
+
+
+}
