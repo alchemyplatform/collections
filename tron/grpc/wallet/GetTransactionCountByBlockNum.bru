@@ -1,0 +1,35 @@
+meta {
+  name: GetTransactionCountByBlockNum
+  type: grpc
+  seq: 8
+}
+
+grpc {
+  url: https://tron-mainnet.g.alchemy.com/
+  method: /protocol.Wallet/GetTransactionCountByBlockNum
+  body: grpc
+  protoPath: grpc/proto/api/api.proto
+  auth: inherit
+  methodType: unary
+}
+
+metadata {
+  X-Token: {{api_key}}
+}
+
+body:grpc {
+  name: message 1
+  content: '''
+    {
+      "num": 74000000
+    }
+  '''
+}
+
+docs {
+  Returns the number of transactions in the block at the given height.
+
+  **Service:** `protocol.Wallet` · **Method:** `GetTransactionCountByBlockNum` (unary)
+
+
+}

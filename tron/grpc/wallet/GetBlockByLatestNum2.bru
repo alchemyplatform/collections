@@ -1,0 +1,35 @@
+meta {
+  name: GetBlockByLatestNum2
+  type: grpc
+  seq: 7
+}
+
+grpc {
+  url: https://tron-mainnet.g.alchemy.com/
+  method: /protocol.Wallet/GetBlockByLatestNum2
+  body: grpc
+  protoPath: grpc/proto/api/api.proto
+  auth: inherit
+  methodType: unary
+}
+
+metadata {
+  X-Token: {{api_key}}
+}
+
+body:grpc {
+  name: message 1
+  content: '''
+    {
+      "num": 5
+    }
+  '''
+}
+
+docs {
+  Returns the latest `num` blocks (max 99).
+
+  **Service:** `protocol.Wallet` · **Method:** `GetBlockByLatestNum2` (unary)
+
+
+}

@@ -1,0 +1,45 @@
+meta {
+  name: TriggerContract
+  type: grpc
+  seq: 16
+}
+
+grpc {
+  url: https://tron-mainnet.g.alchemy.com/
+  method: /protocol.Wallet/TriggerContract
+  body: grpc
+  protoPath: grpc/proto/api/api.proto
+  auth: inherit
+  methodType: unary
+}
+
+metadata {
+  X-Token: {{api_key}}
+}
+
+body:grpc {
+  name: message 1
+  content: '''
+    {
+      "owner_address": "QeVS9kh1hcK1i8LJu0SSvB8XEyzQ",
+      "contract_address": "QaYU+AO2/XgJhqQseOycf3fm3tE8",
+      "data": "cKCCMQAAAAAAAAAAAAAAAOVS9kh1hcK1i8LJu0SSvB8XEyzQ",
+      "call_value": 0
+    }
+  '''
+}
+
+docs {
+  Builds an **unsigned** transaction that executes a state-changing smart-contract
+  call (`TransactionExtention`). Sign it locally and submit via
+  `BroadcastTransaction`.
+
+  - `data`: base64 of the ABI-encoded function call.
+  - `call_value`: TRX (in SUN) to send with the call.
+
+  **Service:** `protocol.Wallet` · **Method:** `TriggerContract` (unary)
+
+  All `bytes` fields are sent as **base64 of the raw bytes** (protobuf JSON mapping).
+  For a TRON address, base58-decode it (or take the 21-byte hex form starting with `41`)
+  and base64-encode the raw bytes, e.g. `echo 41E552...32CD0 | xxd -r -p | base64`.
+}

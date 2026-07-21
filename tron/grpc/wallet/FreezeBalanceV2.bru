@@ -1,0 +1,43 @@
+meta {
+  name: FreezeBalanceV2
+  type: grpc
+  seq: 26
+}
+
+grpc {
+  url: https://tron-mainnet.g.alchemy.com/
+  method: /protocol.Wallet/FreezeBalanceV2
+  body: grpc
+  protoPath: grpc/proto/api/api.proto
+  auth: inherit
+  methodType: unary
+}
+
+metadata {
+  X-Token: {{api_key}}
+}
+
+body:grpc {
+  name: message 1
+  content: '''
+    {
+      "owner_address": "QeVS9kh1hcK1i8LJu0SSvB8XEyzQ",
+      "frozen_balance": 1000000,
+      "resource": "ENERGY"
+    }
+  '''
+}
+
+docs {
+  Builds an **unsigned** Stake 2.0 transaction that stakes TRX for a resource.
+  Sign locally and submit via `BroadcastTransaction`.
+
+  - `frozen_balance`: amount in SUN.
+  - `resource`: `BANDWIDTH` or `ENERGY`.
+
+  **Service:** `protocol.Wallet` · **Method:** `FreezeBalanceV2` (unary)
+
+  All `bytes` fields are sent as **base64 of the raw bytes** (protobuf JSON mapping).
+  For a TRON address, base58-decode it (or take the 21-byte hex form starting with `41`)
+  and base64-encode the raw bytes, e.g. `echo 41E552...32CD0 | xxd -r -p | base64`.
+}

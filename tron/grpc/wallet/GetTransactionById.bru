@@ -1,0 +1,39 @@
+meta {
+  name: GetTransactionById
+  type: grpc
+  seq: 9
+}
+
+grpc {
+  url: https://tron-mainnet.g.alchemy.com/
+  method: /protocol.Wallet/GetTransactionById
+  body: grpc
+  protoPath: grpc/proto/api/api.proto
+  auth: inherit
+  methodType: unary
+}
+
+metadata {
+  X-Token: {{api_key}}
+}
+
+body:grpc {
+  name: message 1
+  content: '''
+    {
+      "value": "0IB62zxUEqoVB4e5RMlu6JjJl969wn4vamQ8dx7bWTM="
+    }
+  '''
+}
+
+docs {
+  Fetches a transaction by its ID.
+
+  - `value`: the 32-byte transaction ID, base64-encoded.
+
+  **Service:** `protocol.Wallet` · **Method:** `GetTransactionById` (unary)
+
+  All `bytes` fields are sent as **base64 of the raw bytes** (protobuf JSON mapping).
+  For a TRON address, base58-decode it (or take the 21-byte hex form starting with `41`)
+  and base64-encode the raw bytes, e.g. `echo 41E552...32CD0 | xxd -r -p | base64`.
+}

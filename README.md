@@ -16,6 +16,7 @@ We use [Bruno](https://www.usebruno.com/) - an open-source, git-based and fully 
 | **bitcoin**  | ✓        | ✓         | N/A  | ✓        | N/A     |
 | **solana**   | ✓        | ✓         | ✓    | N/A      | N/A     |
 | **sui**      | ✓        | N/A       | ✓    | N/A      | ✓       |
+| **tron**     | N/A      | N/A       | ✓    | N/A      | N/A     |
 | **zksync**   | ✓        | N/A       | N/A  | N/A      | N/A     |
 
 ## Getting Started

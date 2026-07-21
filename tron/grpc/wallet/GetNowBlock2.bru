@@ -1,0 +1,34 @@
+meta {
+  name: GetNowBlock2
+  type: grpc
+  seq: 4
+}
+
+grpc {
+  url: https://tron-mainnet.g.alchemy.com/
+  method: /protocol.Wallet/GetNowBlock2
+  body: grpc
+  protoPath: grpc/proto/api/api.proto
+  auth: inherit
+  methodType: unary
+}
+
+metadata {
+  X-Token: {{api_key}}
+}
+
+body:grpc {
+  name: message 1
+  content: '''
+    {}
+  '''
+}
+
+docs {
+  Returns the latest block produced on the chain, including transaction IDs
+  (`BlockExtention`). Preferred over the legacy `GetNowBlock`.
+
+  **Service:** `protocol.Wallet` · **Method:** `GetNowBlock2` (unary)
+
+  Request body: empty message.
+}
