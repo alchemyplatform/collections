@@ -97,7 +97,9 @@ The Indexer API provides indexed and aggregated blockchain data through a GraphQ
 
 The Transaction Stream Service provides real-time streaming of transactions from the Aptos blockchain.
 
-**Authentication**: Requires `x-aptos-data-authorization` header with API key. Contact Aptos Labs for access.
+**Service**: `aptos.indexer.v1.RawData/GetTransactions` (server-streaming)
+
+**Authentication**: Requires `authorization: Bearer <key>` header — set `aptos_api_key` in your Bruno environment. Get a key at https://developers.aptoslabs.com/.
 
 **Key Features**:
 - Real-time transaction streaming
@@ -118,12 +120,29 @@ The Transaction Stream Service provides real-time streaming of transactions from
 - Can replay historical transactions
 - Used by the Aptos Indexer itself
 
+### 4. Indexer gRPC via Alchemy (gRPC)
+
+**Location**: `grpc/`  
+**Base URL**: `https://aptos-mainnet.g.alchemy.com/`  
+**Type**: gRPC Streaming API  
+**Documentation**: https://aptos.dev/build/indexer/txn-stream
+
+The same Transaction Stream Service (`aptos.indexer.v1.RawData/GetTransactions`),
+served through Alchemy's endpoints.
+
+**Authentication**: `X-Token: {{api_key}}` header (same as Alchemy's Solana/Sui
+gRPC) — set `api_key` in your Bruno environment.
+
+**Networks**:
+- Mainnet: `https://aptos-mainnet.g.alchemy.com/`
+- Testnet: `https://aptos-testnet.g.alchemy.com/`
+
 ## Network Information
 
 ### Mainnet (Alchemy)
 - Full Node: `https://aptos-mainnet.g.alchemy.com/v2/{{api_key}}/v1/`
 - Indexer: `https://api.mainnet.aptoslabs.com/v1/graphql`
-- Transaction Stream: `grpc.mainnet.aptoslabs.com:443`
+- Transaction Stream (gRPC): `https://aptos-mainnet.g.alchemy.com/` with `X-Token: {{api_key}}`
 - Chain ID: 1
 
 ### Mainnet (Aptos Labs)

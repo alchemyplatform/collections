@@ -9,13 +9,13 @@
   "protobuf": {
     "protoFiles": [
       {
-        "path": "txn-stream/aptos.proto",
+        "path": "grpc/proto/aptos/indexer/v1/raw_data.proto",
         "type": "file"
       }
     ],
     "importPaths": [
       {
-        "path": "txn-stream",
+        "path": "grpc/proto",
         "enabled": true
       }
     ]
