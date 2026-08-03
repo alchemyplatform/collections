@@ -5,7 +5,7 @@ meta {
 }
 
 grpc {
-  url: grpc.mainnet.aptoslabs.com:443
+  url: https://aptos-mainnet.g.alchemy.com/
   method: /aptos.indexer.v1.RawData/GetTransactions
   body: grpc
   protoPath: grpc/proto/aptos/indexer/v1/raw_data.proto
@@ -14,14 +14,14 @@ grpc {
 }
 
 metadata {
-  authorization: Bearer {{aptos_api_key}}
+  X-Token: {{api_key}}
 }
 
 body:grpc {
   name: message 1
   content: '''
     {
-      "starting_version": "0",
+      "starting_version": "1",
       "transactions_count": "10"
     }
   '''
@@ -29,13 +29,10 @@ body:grpc {
 
 docs {
   Streams transactions from the Aptos blockchain starting from a specific
-  version, using the Aptos Labs hosted Transaction Stream Service.
+  version, using the Transaction Stream Service through Alchemy.
 
   **Service:** `aptos.indexer.v1.RawData`
   **Method:** `GetTransactions` (server-streaming)
-
-  For the same stream served through Alchemy endpoints, use the request in
-  the `grpc/` folder instead.
 
   Request Parameters:
   - starting_version: The ledger version to start streaming from (optional)
@@ -56,9 +53,8 @@ docs {
     - Signature information
 
   Authentication:
-  - Requires `authorization: Bearer <key>` header (set `aptos_api_key` in
-    your Bruno environment)
-  - Get an API key from https://developers.aptoslabs.com/
+  - Requires an `X-Token` header (set `api_key` in your Bruno environment)
+  - Get an API key from https://dashboard.alchemy.com/
 
   Use Cases:
   - Real-time transaction monitoring
@@ -67,5 +63,4 @@ docs {
   - Analytics and data processing
 
   https://aptos.dev/build/indexer/txn-stream
-  https://aptos.dev/build/indexer/txn-stream/aptos-hosted-txn-stream
 }
