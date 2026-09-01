@@ -1,0 +1,48 @@
+meta {
+  name: GetObject
+  type: grpc
+  seq: 2
+}
+
+grpc {
+  url: https://sui-mainnet.g.alchemy.com/
+  method: /sui.rpc.v2.LedgerService/GetObject
+  body: grpc
+  protoPath: grpc/proto/sui/rpc/v2/ledger_service.proto
+  auth: inherit
+  methodType: unary
+}
+
+metadata {
+  X-Token: {{api_key}}
+}
+
+body:grpc {
+  name: message 1
+  content: '''
+    {
+      "object_id": "0x5",
+      "read_mask": {
+        "paths": ["object_id", "version", "digest", "object_type"]
+      }
+    }
+  '''
+}
+
+docs {
+  Fetch a single object by ID (optionally at a specific version).
+
+  **Service:** `sui.rpc.v2.LedgerService` · **Method:** `GetObject` (unary)
+
+  **Request fields:**
+  - `object_id` (required string): the object's ID.
+  - `version` (optional uint64): request a specific version. If omitted and
+    the object is live, the latest version is returned.
+  - `read_mask` (optional FieldMask): fields to populate. Defaults to
+    `object_id,version,digest` if omitted.
+
+  Example uses `0x5`, the singleton `SuiSystemState` shared object, since
+  it's guaranteed to exist on every network.
+
+  Verified against `sui-mainnet.g.alchemy.com`.
+}

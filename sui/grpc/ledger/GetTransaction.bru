@@ -1,0 +1,54 @@
+meta {
+  name: GetTransaction
+  type: grpc
+  seq: 4
+}
+
+grpc {
+  url: https://sui-mainnet.g.alchemy.com/
+  method: /sui.rpc.v2.LedgerService/GetTransaction
+  body: grpc
+  protoPath: grpc/proto/sui/rpc/v2/ledger_service.proto
+  auth: inherit
+  methodType: unary
+}
+
+metadata {
+  X-Token: {{api_key}}
+}
+
+body:grpc {
+  name: message 1
+  content: '''
+    {
+      "digest": "REPLACE_WITH_A_TRANSACTION_DIGEST",
+      "read_mask": {
+        "paths": ["digest", "checkpoint", "transaction.sender", "effects"]
+      }
+    }
+  '''
+}
+
+docs {
+  Fetch a single transaction by digest.
+
+  **Service:** `sui.rpc.v2.LedgerService` · **Method:** `GetTransaction` (unary)
+
+  **Request fields:**
+  - `digest` (required string): the transaction digest.
+  - `read_mask` (optional FieldMask): fields to populate. Defaults to
+    `digest` if omitted.
+
+  Replace `digest` with a real transaction digest — e.g. pull one from
+  `GetCheckpoint`'s `transactions` field, or from a block explorer.
+
+  **Caveat found while testing:** requesting the `checkpoint` field mask on
+  a synthetic per-checkpoint system transaction (e.g. a
+  `ConsensusCommitPrologue`, identifiable by `sender = 0x0…0`) returned
+  `NOT_FOUND`, even though the same digest resolves fine with a narrower
+  mask (e.g. `digest` only) or via `BatchGetTransactions`. Regular
+  user-submitted transactions were unaffected. Worth confirming with
+  Mysten/node operators if you hit unexpected `NOT_FOUND`s.
+
+  Verified against `sui-mainnet.g.alchemy.com` with a real transaction digest.
+}

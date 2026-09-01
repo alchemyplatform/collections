@@ -1,0 +1,53 @@
+meta {
+  name: BatchGetObjects
+  type: grpc
+  seq: 3
+}
+
+grpc {
+  url: https://sui-mainnet.g.alchemy.com/
+  method: /sui.rpc.v2.LedgerService/BatchGetObjects
+  body: grpc
+  protoPath: grpc/proto/sui/rpc/v2/ledger_service.proto
+  auth: inherit
+  methodType: unary
+}
+
+metadata {
+  X-Token: {{api_key}}
+}
+
+body:grpc {
+  name: message 1
+  content: '''
+    {
+      "requests": [
+        { "object_id": "0x5" },
+        { "object_id": "0x6" }
+      ],
+      "read_mask": {
+        "paths": ["object_id", "version", "digest"]
+      }
+    }
+  '''
+}
+
+docs {
+  Fetch multiple objects by ID in a single call.
+
+  **Service:** `sui.rpc.v2.LedgerService` · **Method:** `BatchGetObjects` (unary)
+
+  **Request fields:**
+  - `requests` (repeated GetObjectRequest): one entry per object to fetch.
+  - `read_mask` (optional FieldMask): applied to every result; overrides any
+    per-request read mask. Defaults to `object_id,version,digest`.
+
+  **Response:** `objects` (repeated `GetObjectResult`) — each entry is
+  either the requested `Object` or a `google.rpc.Status` error, so a
+  not-found object doesn't fail the whole batch.
+
+  Example uses `0x5` (SuiSystemState) and `0x6` (Clock), two singleton
+  shared objects present on every network.
+
+  Verified against `sui-mainnet.g.alchemy.com`.
+}

@@ -1,0 +1,45 @@
+meta {
+  name: GetCoinInfo
+  type: grpc
+  seq: 1
+}
+
+grpc {
+  url: https://sui-mainnet.g.alchemy.com/
+  method: /sui.rpc.v2.StateService/GetCoinInfo
+  body: grpc
+  protoPath: grpc/proto/sui/rpc/v2/state_service.proto
+  auth: inherit
+  methodType: unary
+}
+
+metadata {
+  X-Token: {{api_key}}
+}
+
+body:grpc {
+  name: message 1
+  content: '''
+    {
+      "coin_type": "0x2::sui::SUI"
+    }
+  '''
+}
+
+docs {
+  Fetch metadata and treasury information for a coin type.
+
+  **Service:** `sui.rpc.v2.StateService` · **Method:** `GetCoinInfo` (unary)
+
+  **Request fields:**
+  - `coin_type` (required string): fully-qualified coin type, e.g.
+    `0x2::sui::SUI`.
+
+  **Response fields:**
+  - `metadata` (CoinMetadata): decimals, name, symbol, description, icon.
+  - `treasury` (CoinTreasury): total supply and whether it's still mintable.
+  - `regulated_metadata` (RegulatedCoinMetadata): deny-list / regulated
+    coin info, if applicable.
+
+  Verified against `sui-mainnet.g.alchemy.com`.
+}

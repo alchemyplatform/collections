@@ -1,0 +1,43 @@
+meta {
+  name: ListBalances
+  type: grpc
+  seq: 3
+}
+
+grpc {
+  url: https://sui-mainnet.g.alchemy.com/
+  method: /sui.rpc.v2.StateService/ListBalances
+  body: grpc
+  protoPath: grpc/proto/sui/rpc/v2/state_service.proto
+  auth: inherit
+  methodType: unary
+}
+
+metadata {
+  X-Token: {{api_key}}
+}
+
+body:grpc {
+  name: message 1
+  content: '''
+    {
+      "owner": "REPLACE_WITH_A_SUI_ADDRESS",
+      "page_size": 20
+    }
+  '''
+}
+
+docs {
+  Fetch the balance of every coin type owned by an address.
+
+  **Service:** `sui.rpc.v2.StateService` · **Method:** `ListBalances` (unary)
+
+  **Request fields:**
+  - `owner` (required string): the account's Sui address.
+  - `page_size` (optional uint32): max entries to return. Default 50, max 1000.
+  - `page_token` (optional bytes): pass `next_page_token` from a previous
+    response to paginate.
+
+  Verified against `sui-mainnet.g.alchemy.com` with a real address —
+  returned dozens of coin types.
+}

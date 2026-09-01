@@ -1,0 +1,44 @@
+meta {
+  name: ListOwnedObjects
+  type: grpc
+  seq: 4
+}
+
+grpc {
+  url: https://sui-mainnet.g.alchemy.com/
+  method: /sui.rpc.v2.StateService/ListOwnedObjects
+  body: grpc
+  protoPath: grpc/proto/sui/rpc/v2/state_service.proto
+  auth: inherit
+  methodType: unary
+}
+
+metadata {
+  X-Token: {{api_key}}
+}
+
+body:grpc {
+  name: message 1
+  content: '''
+    {
+      "owner": "REPLACE_WITH_A_SUI_ADDRESS",
+      "page_size": 20
+    }
+  '''
+}
+
+docs {
+  Fetch objects owned by an address.
+
+  **Service:** `sui.rpc.v2.StateService` · **Method:** `ListOwnedObjects` (unary)
+
+  **Request fields:**
+  - `owner` (required string): the account's Sui address.
+  - `page_size` (optional uint32): max entries to return. Default 50, max 1000.
+  - `page_token` (optional bytes): pass `next_page_token` to paginate.
+  - `read_mask` (optional FieldMask): defaults to `object_id,version,object_type`.
+  - `object_type` (optional string): filter by Move type, e.g.
+    `0x2::coin::Coin` (any `T`) or `0x2::coin::Coin<0x2::sui::SUI>` (exact).
+
+  Verified against `sui-mainnet.g.alchemy.com` with a real address.
+}

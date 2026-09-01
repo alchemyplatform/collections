@@ -1,0 +1,71 @@
+meta {
+  name: ExecuteTransaction
+  type: grpc
+  seq: 2
+}
+
+grpc {
+  url: https://sui-mainnet.g.alchemy.com/
+  method: /sui.rpc.v2.TransactionExecutionService/ExecuteTransaction
+  body: grpc
+  protoPath: grpc/proto/sui/rpc/v2/transaction_execution_service.proto
+  auth: inherit
+  methodType: unary
+}
+
+metadata {
+  X-Token: {{api_key}}
+}
+
+body:grpc {
+  name: message 1
+  content: '''
+    {
+      "transaction": {
+        "bcs": {
+          "name": "TransactionData",
+          "value": "REPLACE_WITH_BASE64_BCS_TRANSACTION_DATA"
+        }
+      },
+      "signatures": [
+        {
+          "bcs": {
+            "name": "SenderSignature",
+            "value": "REPLACE_WITH_BASE64_BCS_SIGNATURE"
+          }
+        }
+      ],
+      "read_mask": {
+        "paths": ["effects.status", "checkpoint"]
+      }
+    }
+  '''
+}
+
+docs {
+  Submit a signed transaction for execution on mainnet.
+
+  **Service:** `sui.rpc.v2.TransactionExecutionService` · **Method:** `ExecuteTransaction` (unary)
+
+  **⚠️ Not live-tested.** Unlike every other request in this folder, this
+  one broadcasts a real, irreversible transaction and moves real funds /
+  mutates real on-chain state, so it wasn't run against mainnet while
+  verifying this collection — doing so would have required signing with
+  a live private key. The request/response shapes below are taken
+  directly from the vendored `transaction_execution_service.proto`, not
+  from a live response.
+
+  **Request fields:**
+  - `transaction` (Transaction): the transaction to execute. `bcs.value`
+    is the BCS-encoded `TransactionData`, base64-encoded for the gRPC-JSON
+    body (or populate `transaction.kind`/`sender`/`gas_payment`/
+    `expiration` directly instead of `bcs`).
+  - `signatures` (repeated UserSignature): one signature per required
+    signer, authorizing `transaction`.
+  - `read_mask` (optional FieldMask): defaults to `effects.status,checkpoint`.
+
+  Before using this, build and sign a real transaction with the Sui SDK
+  (or `sui client`), and only run it against an address/network you
+  intend to spend from. Consider testing on `sui-testnet.g.alchemy.com`
+  first.
+}

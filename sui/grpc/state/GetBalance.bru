@@ -1,0 +1,43 @@
+meta {
+  name: GetBalance
+  type: grpc
+  seq: 2
+}
+
+grpc {
+  url: https://sui-mainnet.g.alchemy.com/
+  method: /sui.rpc.v2.StateService/GetBalance
+  body: grpc
+  protoPath: grpc/proto/sui/rpc/v2/state_service.proto
+  auth: inherit
+  methodType: unary
+}
+
+metadata {
+  X-Token: {{api_key}}
+}
+
+body:grpc {
+  name: message 1
+  content: '''
+    {
+      "owner": "REPLACE_WITH_A_SUI_ADDRESS",
+      "coin_type": "0x2::sui::SUI"
+    }
+  '''
+}
+
+docs {
+  Fetch the total balance of one coin type for an address — the sum of
+  its Address Balance and all owned `Coin<T>` objects.
+
+  **Service:** `sui.rpc.v2.StateService` · **Method:** `GetBalance` (unary)
+
+  **Request fields:**
+  - `owner` (required string): the account's Sui address.
+  - `coin_type` (required string): fully-qualified coin type, e.g.
+    `0x2::sui::SUI`.
+
+  Verified against `sui-mainnet.g.alchemy.com` with a real address pulled
+  from a recent checkpoint's transaction senders.
+}

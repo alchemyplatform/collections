@@ -1,0 +1,48 @@
+meta {
+  name: GetEpoch
+  type: grpc
+  seq: 7
+}
+
+grpc {
+  url: https://sui-mainnet.g.alchemy.com/
+  method: /sui.rpc.v2.LedgerService/GetEpoch
+  body: grpc
+  protoPath: grpc/proto/sui/rpc/v2/ledger_service.proto
+  auth: inherit
+  methodType: unary
+}
+
+metadata {
+  X-Token: {{api_key}}
+}
+
+body:grpc {
+  name: message 1
+  content: '''
+    {
+      "read_mask": {
+        "paths": ["epoch"]
+      }
+    }
+  '''
+}
+
+docs {
+  Fetch epoch information. Omit `epoch` in the request to get the current
+  epoch.
+
+  **Service:** `sui.rpc.v2.LedgerService` · **Method:** `GetEpoch` (unary)
+
+  **Request fields:**
+  - `epoch` (optional uint64): the requested epoch. If omitted, the
+    current epoch is returned.
+  - `read_mask` (optional FieldMask): defaults to `epoch`. Other useful
+    paths include `committee` (validator committee for the epoch) and
+    `system_state`.
+
+  Note: requesting `committee` returns the full validator set including
+  raw public key bytes — the response can be large.
+
+  Verified against `sui-mainnet.g.alchemy.com`.
+}
