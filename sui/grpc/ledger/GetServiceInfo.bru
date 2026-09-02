@@ -1,0 +1,48 @@
+meta {
+  name: GetServiceInfo
+  type: grpc
+  seq: 1
+}
+
+grpc {
+  url: https://sui-mainnet.g.alchemy.com/
+  method: /sui.rpc.v2.LedgerService/GetServiceInfo
+  body: grpc
+  protoPath: grpc/proto/sui/rpc/v2/ledger_service.proto
+  auth: inherit
+  methodType: unary
+}
+
+metadata {
+  X-Token: {{api_key}}
+}
+
+body:grpc {
+  name: message 1
+  content: '''
+    {}
+  '''
+}
+
+docs {
+  Query the node for general information about its current state.
+
+  **Service:** `sui.rpc.v2.LedgerService` · **Method:** `GetServiceInfo` (unary)
+
+  No request fields — takes an empty message.
+
+  **Response fields:**
+  - `chain_id` (string): digest of the genesis checkpoint (sequence number 0).
+  - `chain` (string): human-readable chain name, e.g. `mainnet`.
+  - `epoch` (uint64): current epoch based on the highest executed checkpoint.
+  - `checkpoint_height` (uint64): sequence number of the most recently
+    executed checkpoint.
+  - `timestamp` (Timestamp): unix timestamp of that checkpoint.
+  - `lowest_available_checkpoint` (uint64): lowest checkpoint for which
+    checkpoint/transaction data is still available.
+  - `lowest_available_checkpoint_objects` (uint64): lowest checkpoint for
+    which object data is still available.
+  - `server` (string): software version of the node.
+
+  Verified against `sui-mainnet.g.alchemy.com` — returns live chain state.
+}

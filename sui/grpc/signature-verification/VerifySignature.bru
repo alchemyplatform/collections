@@ -1,0 +1,73 @@
+meta {
+  name: VerifySignature
+  type: grpc
+  seq: 1
+}
+
+grpc {
+  url: https://sui-mainnet.g.alchemy.com/
+  method: /sui.rpc.v2.SignatureVerificationService/VerifySignature
+  body: grpc
+  protoPath: grpc/proto/sui/rpc/v2/signature_verification_service.proto
+  auth: inherit
+  methodType: unary
+}
+
+metadata {
+  X-Token: {{api_key}}
+}
+
+body:grpc {
+  name: message 1
+  content: '''
+    {
+      "message": {
+        "name": "PersonalMessage",
+        "value": "BWhlbGxv"
+      },
+      "signature": {
+        "scheme": "ED25519",
+        "simple": {
+          "scheme": "ED25519",
+          "signature": "AQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQ==",
+          "public_key": "AgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgI="
+        }
+      }
+    }
+  '''
+}
+
+docs {
+  Verify a `UserSignature` against a message, without needing a node's
+  local key/signing state.
+
+  **Service:** `sui.rpc.v2.SignatureVerificationService` · **Method:** `VerifySignature` (unary)
+
+  **Request fields:**
+  - `message` (Bcs): the BCS-encoded message being verified. `name` must
+    be `PersonalMessage` or `TransactionData` to tell the server how to
+    interpret `value`. `bytes` fields are base64 in JSON (protobuf JSON
+    mapping) — `message.value` here is `"hello"` BCS-encoded as a
+    `Vec<u8>` (ULEB128 length prefix + raw bytes).
+  - `signature` (UserSignature): the signature to check. For a plain
+    ed25519/secp256k1/secp256r1 signature use the `simple` oneof variant;
+    `multisig`, `zklogin`, and `passkey` are also supported.
+  - `address` (optional string): if set, the response only succeeds if
+    this address matches the one derived from the signature.
+  - `jwks` (optional, repeated ActiveJwk): JWKs to use for zklogin
+    verification; defaults to the current on-chain set if omitted.
+
+  **Response fields:**
+  - `is_valid` (bool)
+  - `reason` (string): populated when `is_valid` is `false`.
+
+  The example request uses placeholder (non-cryptographic) signature and
+  public key bytes, so it's expected to come back with `is_valid: false`
+  and a decoding-related `reason` — that's the endpoint correctly
+  rejecting a bogus signature, not a transport error. Swap in a real
+  message/signature/public key to verify an actual signature.
+
+  Verified against `sui-mainnet.g.alchemy.com` — returned
+  `is_valid: false, reason: "signature error: Cannot decompress Edwards point"`
+  for this placeholder payload.
+}

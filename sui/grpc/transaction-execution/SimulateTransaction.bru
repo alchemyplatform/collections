@@ -1,0 +1,75 @@
+meta {
+  name: SimulateTransaction
+  type: grpc
+  seq: 1
+}
+
+grpc {
+  url: https://sui-mainnet.g.alchemy.com/
+  method: /sui.rpc.v2.TransactionExecutionService/SimulateTransaction
+  body: grpc
+  protoPath: grpc/proto/sui/rpc/v2/transaction_execution_service.proto
+  auth: inherit
+  methodType: unary
+}
+
+metadata {
+  X-Token: {{api_key}}
+}
+
+body:grpc {
+  name: message 1
+  content: '''
+    {
+      "transaction": {
+        "sender": "REPLACE_WITH_A_SUI_ADDRESS",
+        "gas_payment": {
+          "owner": "REPLACE_WITH_A_SUI_ADDRESS",
+          "price": "1000",
+          "budget": "10000000",
+          "objects": []
+        },
+        "kind": {
+          "kind": "PROGRAMMABLE_TRANSACTION",
+          "programmable_transaction": {
+            "inputs": [],
+            "commands": []
+          }
+        },
+        "expiration": {
+          "kind": "NONE"
+        }
+      },
+      "checks": "DISABLED"
+    }
+  '''
+}
+
+docs {
+  Dry-run a transaction without submitting it to the network. Does not
+  require signatures and does not mutate any on-chain state.
+
+  **Service:** `sui.rpc.v2.TransactionExecutionService` · **Method:** `SimulateTransaction` (unary)
+
+  **Request fields:**
+  - `transaction` (Transaction): the unsigned transaction to simulate.
+  - `read_mask` (optional FieldMask): fields to populate in the response.
+  - `checks` (optional enum, `ENABLED` default | `DISABLED`): whether to
+    run the full set of pre-execution validity checks. `DISABLED` skips
+    things like requiring real, ownable gas coin objects, which is what
+    lets this example run with `gas_payment.objects: []` — it falls back
+    to charging gas against the sender's address-balance instead.
+  - `do_gas_selection` (optional bool): ask the server to pick gas
+    objects/budget for you. Ignored when `checks` is `DISABLED`.
+
+  The example is an empty `ProgrammableTransaction` (no inputs, no
+  commands) — a syntactically valid no-op used purely to exercise the
+  endpoint. Replace `sender`/`gas_payment.owner` with a real address, and
+  build a real `programmable_transaction` (inputs + commands / MoveCalls)
+  to simulate an actual transaction.
+
+  Verified against `sui-mainnet.g.alchemy.com` — returned a
+  `SimulateTransactionResponse` with the sender's simulated gas
+  `balance_changes`, confirming the RPC and address-balance gas path both
+  work end-to-end.
+}

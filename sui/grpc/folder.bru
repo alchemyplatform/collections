@@ -6,3 +6,37 @@ meta {
 auth {
   mode: inherit
 }
+
+docs {
+  Sui gRPC API (`sui.rpc.v2`), served through Alchemy.
+
+  **Endpoint:** `https://sui-mainnet.g.alchemy.com/`
+
+  **Auth:** send your Alchemy API key as gRPC metadata:
+  `X-Token: <api_key>` (set `api_key` in your Bruno environment).
+
+  **Protos:** the real Sui v2 protos are vendored under `grpc/proto/sui/rpc/v2/`
+  (source: https://github.com/MystenLabs/sui-apis/tree/main/proto/sui/rpc/v2).
+
+  **Services covered, all live-verified against `sui-mainnet.g.alchemy.com`
+  except where noted:**
+  - `SubscriptionService` — `SubscribeCheckpoints`, the only streaming RPC
+    Sui exposes (server-streaming). See `subscribe-checkpoints.bru`.
+  - `LedgerService` (`ledger/`) — `GetServiceInfo`, `GetObject`,
+    `BatchGetObjects`, `GetTransaction`, `BatchGetTransactions`,
+    `GetCheckpoint`, `GetEpoch`.
+  - `StateService` (`state/`) — `GetCoinInfo`, `GetBalance`, `ListBalances`,
+    `ListOwnedObjects`, `ListDynamicFields`.
+  - `MovePackageService` (`move-package/`) — `GetPackage`,
+    `ListPackageVersions`, `GetDatatype`, `GetFunction`.
+  - `SignatureVerificationService` (`signature-verification/`) —
+    `VerifySignature`.
+  - `TransactionExecutionService` (`transaction-execution/`) —
+    `SimulateTransaction` (verified — doesn't mutate state) and
+    `ExecuteTransaction` (**not** live-tested: it broadcasts a real signed
+    transaction and moves funds, which needs a live private key — see that
+    request's docs).
+
+  All unary methods are unary; only `SubscribeCheckpoints` streams. Sui does
+  not offer per-transaction, per-event, or per-object subscriptions.
+}

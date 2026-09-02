@@ -1,0 +1,49 @@
+meta {
+  name: BatchGetTransactions
+  type: grpc
+  seq: 5
+}
+
+grpc {
+  url: https://sui-mainnet.g.alchemy.com/
+  method: /sui.rpc.v2.LedgerService/BatchGetTransactions
+  body: grpc
+  protoPath: grpc/proto/sui/rpc/v2/ledger_service.proto
+  auth: inherit
+  methodType: unary
+}
+
+metadata {
+  X-Token: {{api_key}}
+}
+
+body:grpc {
+  name: message 1
+  content: '''
+    {
+      "digests": ["REPLACE_WITH_A_TRANSACTION_DIGEST"],
+      "read_mask": {
+        "paths": ["digest"]
+      }
+    }
+  '''
+}
+
+docs {
+  Fetch multiple transactions by digest in a single call.
+
+  **Service:** `sui.rpc.v2.LedgerService` · **Method:** `BatchGetTransactions` (unary)
+
+  **Request fields:**
+  - `digests` (repeated string): the transaction digests to fetch.
+  - `read_mask` (optional FieldMask): applied to every result. Defaults to
+    `digest` if omitted.
+
+  **Response:** `transactions` (repeated `GetTransactionResult`) — each
+  entry is either the `ExecutedTransaction` or a `google.rpc.Status`
+  error, so one missing digest doesn't fail the whole batch.
+
+  Replace the digest with a real one (e.g. from `GetCheckpoint`).
+
+  Verified against `sui-mainnet.g.alchemy.com`.
+}

@@ -1,0 +1,45 @@
+meta {
+  name: ListDynamicFields
+  type: grpc
+  seq: 5
+}
+
+grpc {
+  url: https://sui-mainnet.g.alchemy.com/
+  method: /sui.rpc.v2.StateService/ListDynamicFields
+  body: grpc
+  protoPath: grpc/proto/sui/rpc/v2/state_service.proto
+  auth: inherit
+  methodType: unary
+}
+
+metadata {
+  X-Token: {{api_key}}
+}
+
+body:grpc {
+  name: message 1
+  content: '''
+    {
+      "parent": "0x5",
+      "page_size": 20
+    }
+  '''
+}
+
+docs {
+  Fetch the dynamic fields owned by a parent object's UID.
+
+  **Service:** `sui.rpc.v2.StateService` · **Method:** `ListDynamicFields` (unary)
+
+  **Request fields:**
+  - `parent` (required string): the UID of the parent object.
+  - `page_size` (optional uint32): max entries to return. Default 50, max 1000.
+  - `page_token` (optional bytes): pass `next_page_token` to paginate.
+  - `read_mask` (optional FieldMask): defaults to `parent,field_id`.
+
+  Example uses `0x5` (`SuiSystemState`), which has at least one dynamic
+  field on mainnet.
+
+  Verified against `sui-mainnet.g.alchemy.com`.
+}
