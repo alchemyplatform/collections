@@ -37,10 +37,10 @@ docs {
   - `start_block` (optional uint64, as string): inclusive block number to
     resume from.
 
-  The server only retains the last ~64 blocks in memory (a few seconds of
-  mainnet), so replay is meant for reconnecting clients rather than history.
+  Replay only covers a short window of recent blocks (a few seconds of
+  mainnet), so it is meant for reconnecting clients rather than history.
   Replace the example value with a `block_number` received moments ago from
-  the live `StreamBlocks` request. A height older than the retained window
+  the live `StreamBlocks` request. A height older than the replay window
   ends the stream immediately with `NOT_FOUND`.
 
   **Response stream (`BlockMessage`):**

@@ -33,9 +33,9 @@ path in `bruno.json`.
 
 - `StreamBlocks` — live tail of raw execution blocks from the current tip.
 - `StreamBlocks (replay)` — resume from `start_block` (inclusive), then follow
-  the live stream. Only the last ~64 blocks (a few seconds of mainnet) are
-  retained, so this is for reconnecting clients rather than history; older
-  heights end the stream with `NOT_FOUND`.
+  the live stream. Replay only covers a short window of recent blocks (a few
+  seconds of mainnet), so this is for reconnecting clients rather than
+  history; older heights end the stream with `NOT_FOUND`.
 
 Each `BlockMessage` carries a sequential `block_number` and `data`, the raw
 `replica_cmds` block JSON exactly as the node wrote it. Protobuf JSON encodes
@@ -51,7 +51,7 @@ Gaps end the stream with a gRPC status instead of an in-band message:
 
 | Status | Meaning |
 |--------|---------|
-| `NOT_FOUND` | `start_block` is older than the retained window |
+| `NOT_FOUND` | `start_block` is older than the replay window |
 | `ABORTED` | The client fell behind the live stream |
 | `UNAVAILABLE` | The feed is not ready or the server is draining |
 
