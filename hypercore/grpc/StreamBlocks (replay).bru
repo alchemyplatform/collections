@@ -49,6 +49,6 @@ docs {
     JSON.
 
   Other terminal statuses: `ABORTED` (client fell behind the live stream),
-  `UNAVAILABLE` (feed not ready or server draining). Reconnect from the last
-  `block_number` you received.
+  `UNAVAILABLE` (service temporarily unavailable). To resume, reconnect with
+  `start_block` set to the last `block_number` you processed plus one.
 }

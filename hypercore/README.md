@@ -53,6 +53,7 @@ Gaps end the stream with a gRPC status instead of an in-band message:
 |--------|---------|
 | `NOT_FOUND` | `start_block` is older than the replay window |
 | `ABORTED` | The client fell behind the live stream |
-| `UNAVAILABLE` | The feed is not ready or the server is draining |
+| `UNAVAILABLE` | The service is temporarily unavailable; retry with backoff |
 
-Reconnect with `start_block` set to the last `block_number` you received.
+To resume, reconnect with `start_block` set to the last `block_number` you
+processed plus one.
