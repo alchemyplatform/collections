@@ -43,9 +43,12 @@ docs {
     wrote it. Protobuf JSON shows `bytes` as base64; decode it to get the
     block JSON (`echo <data> | base64 -d | jq`).
 
-  **Stream termination:** gaps end the stream with a gRPC status rather than
-  an in-band message:
-  - `NOT_FOUND` — `start_block` is older than the replay window.
+  Check that `block_number` increases by one; a jump means blocks were
+  missed upstream and cannot be recovered from this stream.
+
+  **Stream termination:** the stream ends with one of these gRPC statuses:
+  - `NOT_FOUND` — `start_block` cannot be replayed (older than the replay
+    window, or that range is not available).
   - `ABORTED` — the client fell behind the live stream.
   - `UNAVAILABLE` — the service is temporarily unavailable; retry with
     backoff.

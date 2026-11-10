@@ -47,11 +47,14 @@ echo <data> | base64 -d | jq
 
 ## Stream termination
 
-Gaps end the stream with a gRPC status instead of an in-band message:
+Check that `block_number` increases by one; a jump means blocks were missed
+upstream and cannot be recovered from this stream.
+
+The stream ends with one of these gRPC statuses:
 
 | Status | Meaning |
 |--------|---------|
-| `NOT_FOUND` | `start_block` is older than the replay window |
+| `NOT_FOUND` | `start_block` cannot be replayed (older than the replay window, or that range is not available); resubscribe without `start_block` |
 | `ABORTED` | The client fell behind the live stream |
 | `UNAVAILABLE` | The service is temporarily unavailable; retry with backoff |
 

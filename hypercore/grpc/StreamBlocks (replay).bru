@@ -40,8 +40,10 @@ docs {
   Replay only covers a short window of recent blocks (a few seconds of
   mainnet), so it is meant for reconnecting clients rather than history.
   Replace the example value with a `block_number` received moments ago from
-  the live `StreamBlocks` request. A height older than the replay window
-  ends the stream immediately with `NOT_FOUND`.
+  the live `StreamBlocks` request. A height that cannot be replayed (older
+  than the replay window, or that range is not available) ends the stream
+  immediately with `NOT_FOUND`; resubscribe without `start_block` to
+  continue from the latest block.
 
   **Response stream (`BlockMessage`):**
   - `block_number` (uint64): sequential Hyperliquid block number.
