@@ -1,0 +1,23 @@
+{
+  "version": "1",
+  "name": "hypercore",
+  "type": "collection",
+  "ignore": [
+    "node_modules",
+    ".git"
+  ],
+  "protobuf": {
+    "protoFiles": [
+      {
+        "path": "grpc/proto/streams/v1/blocks.proto",
+        "type": "file"
+      }
+    ],
+    "importPaths": [
+      {
+        "path": "grpc/proto",
+        "enabled": true
+      }
+    ]
+  }
+}

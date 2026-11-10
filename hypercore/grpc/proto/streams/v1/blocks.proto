@@ -1,0 +1,32 @@
+syntax = "proto3";
+
+package streams.v1;
+
+// Streams raw Hyperliquid execution blocks (the node's `replica_cmds`), one
+// message per block in ascending block order. The payload is the source JSON
+// verbatim (reassembled from the chunked NATS `HL_BLOCKS` stream) and is never
+// decoded server-side.
+service BlockStream {
+  // Server-streaming blocks. Omit `start_block` for a live-only tail; set it to
+  // replay inclusively from that height, bounded by the server's in-memory ring.
+  //
+  // Gaps are signalled by terminating the stream with a gRPC status, not an
+  // in-band message (so there is no gap field here):
+  //   NOT_FOUND     - `start_block` is older than the retained ring (unrecoverable)
+  //   ABORTED       - the consumer fell behind the live stream
+  //   UNAVAILABLE   - the feed is not ready or is draining
+  // A client reconnects from its last received `block_number`.
+  rpc StreamBlocks(StreamBlocksRequest) returns (stream BlockMessage);
+}
+
+message StreamBlocksRequest {
+  // Inclusive resume block number. Unset tails new blocks from the current tip.
+  optional uint64 start_block = 1;
+}
+
+message BlockMessage {
+  // Sequential Hyperliquid block number (not the HyperBFT consensus round).
+  uint64 block_number = 1;
+  // Raw `replica_cmds` block as the node wrote it, verbatim JSON bytes.
+  bytes data = 2;
+}
