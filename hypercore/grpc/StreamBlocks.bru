@@ -1,0 +1,58 @@
+meta {
+  name: StreamBlocks
+  type: grpc
+  seq: 1
+}
+
+grpc {
+  url: https://hypercore-mainnet.g.alchemy.com/
+  method: /streams.v1.BlockStream/StreamBlocks
+  body: grpc
+  protoPath: grpc/proto/streams/v1/blocks.proto
+  auth: inherit
+  methodType: server-streaming
+}
+
+metadata {
+  X-Token: {{api_key}}
+}
+
+body:grpc {
+  name: message 1
+  content: '''
+    {}
+  '''
+}
+
+docs {
+  Live tail of raw Hyperliquid execution blocks (the node's `replica_cmds`),
+  one message per block in ascending block order, starting from the current
+  tip.
+
+  **Service:** `streams.v1.BlockStream`
+  **Method:** `StreamBlocks` (server-streaming)
+
+  **Request fields (`StreamBlocksRequest`):**
+  - `start_block` (optional uint64, as string): omit for a live-only tail.
+    See the `StreamBlocks (replay)` request to resume from a height.
+
+  **Response stream (`BlockMessage`):**
+  - `block_number` (uint64): sequential Hyperliquid block number (not the
+    HyperBFT consensus round).
+  - `data` (bytes): the raw `replica_cmds` block JSON exactly as the node
+    wrote it. Protobuf JSON shows `bytes` as base64; decode it to get the
+    block JSON (`echo <data> | base64 -d | jq`).
+
+  Check that `block_number` increases by one; a jump means blocks were
+  missed upstream and cannot be recovered from this stream.
+
+  **Stream termination:** the stream ends with one of these gRPC statuses:
+  - `NOT_FOUND` — `start_block` cannot be replayed (older than the replay
+    window, or that range is not available).
+  - `ABORTED` — the client fell behind the live stream.
+  - `UNAVAILABLE` — the service is temporarily unavailable; retry with
+    backoff.
+
+  To resume, reconnect with `start_block` set to the last `block_number` you
+  processed plus one.
+}

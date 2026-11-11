@@ -1,0 +1,56 @@
+meta {
+  name: StreamBlocks (replay)
+  type: grpc
+  seq: 2
+}
+
+grpc {
+  url: https://hypercore-mainnet.g.alchemy.com/
+  method: /streams.v1.BlockStream/StreamBlocks
+  body: grpc
+  protoPath: grpc/proto/streams/v1/blocks.proto
+  auth: inherit
+  methodType: server-streaming
+}
+
+metadata {
+  X-Token: {{api_key}}
+}
+
+body:grpc {
+  name: message 1
+  content: '''
+    {
+      "start_block": "800000000"
+    }
+  '''
+}
+
+docs {
+  Replay raw Hyperliquid execution blocks from `start_block` (inclusive),
+  then continue with the live stream.
+
+  **Service:** `streams.v1.BlockStream`
+  **Method:** `StreamBlocks` (server-streaming)
+
+  **Request fields (`StreamBlocksRequest`):**
+  - `start_block` (optional uint64, as string): inclusive block number to
+    resume from.
+
+  Replay only covers a short window of recent blocks (a few seconds of
+  mainnet), so it is meant for reconnecting clients rather than history.
+  Replace the example value with a `block_number` received moments ago from
+  the live `StreamBlocks` request. A height that cannot be replayed (older
+  than the replay window, or that range is not available) ends the stream
+  immediately with `NOT_FOUND`; resubscribe without `start_block` to
+  continue from the latest block.
+
+  **Response stream (`BlockMessage`):**
+  - `block_number` (uint64): sequential Hyperliquid block number.
+  - `data` (bytes): the raw `replica_cmds` block JSON, base64 in protobuf
+    JSON.
+
+  Other terminal statuses: `ABORTED` (client fell behind the live stream),
+  `UNAVAILABLE` (service temporarily unavailable). To resume, reconnect with
+  `start_block` set to the last `block_number` you processed plus one.
+}

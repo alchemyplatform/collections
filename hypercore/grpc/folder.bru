@@ -1,0 +1,23 @@
+meta {
+  name: grpc
+  seq: 1
+}
+
+auth {
+  mode: inherit
+}
+
+docs {
+  HyperCore (Hyperliquid) gRPC block stream — the `streams.v1.BlockStream`
+  service, served through Alchemy.
+
+  **Endpoint:**
+  - Mainnet: `https://hypercore-mainnet.g.alchemy.com/`
+
+  **Auth:** send your Alchemy API key as gRPC metadata:
+  `X-Token: <api_key>` (set `api_key` in your Bruno environment).
+
+  **Protos:** the gateway does not expose server reflection, so the proto is
+  bundled under `grpc/proto/`. The entrypoint is
+  `grpc/proto/streams/v1/blocks.proto`.
+}
